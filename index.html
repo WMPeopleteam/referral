@@ -1205,29 +1205,20 @@
               <div class="field full">
                 <label for="performanceCredit">팀에 대한 태도 <span class="required-badge">필수 응답</span></label>
                 <p class="question-text">함께 일할 때 본인의 역할과 다른 사람의 기여를 어떻게 바라보고 이야기하는 편이었나요?</p>
-                <textarea id="performanceCredit" name="performanceCredit" placeholder="예: 준공 보고 때 도면은 ○○과장이, 협력사 조율은 본인이 했다고 나눠서 말했습니다."></textarea>
+                <textarea id="performanceCredit" name="performanceCredit" placeholder="예: 준공 보고 때 도면 검토는 ○○과장이 맡았고, 협력사 조율은 본인이 맡았다고 구분해서 설명했습니다. 문제를 혼자 해결한 것처럼 말하기보다 함께 한 사람의 역할을 같이 이야기하는 편이었습니다."></textarea>
                 <label class="observe-check"><input type="checkbox" data-observe-none="performanceCredit">같이 일하면서 볼 기회가 없었습니다.</label>
-                <div class="field-meta">
-                  <p class="hint">사례가 있다면 1~2문장으로 간단히 적어 주세요.</p>
-                </div>
               </div>
               <div class="field full">
                 <label for="proactiveCompletion">주도성과 책임 <span class="required-badge">필수 응답</span></label>
                 <p class="question-text">필요한 일을 먼저 찾아 하거나, 어려움이 있어도 끝까지 마무리했던 모습이 있었나요?</p>
-                <textarea id="proactiveCompletion" name="proactiveCompletion" class="compact" placeholder="예: 누락된 체크리스트를 먼저 정리해 공유했고, 끝까지 업데이트했습니다."></textarea>
+                <textarea id="proactiveCompletion" name="proactiveCompletion" class="compact" placeholder="예: 현장 점검 전 누락된 체크리스트를 먼저 정리해 팀에 공유했고, 확인되지 않은 항목은 담당자에게 다시 물어 끝까지 업데이트했습니다. 본인 업무가 아니어도 필요한 일을 발견하면 먼저 움직이는 편이었습니다."></textarea>
                 <label class="observe-check"><input type="checkbox" data-observe-none="proactiveCompletion">같이 일하면서 볼 기회가 없었습니다.</label>
-                <div class="field-meta">
-                  <p class="hint">사례가 있다면 1~2문장으로 간단히 적어 주세요.</p>
-                </div>
               </div>
               <div class="field full">
                 <label for="conflictHandling">협업과 대응 <span class="required-badge">필수 응답</span></label>
                 <p class="question-text">의견이 다른 사람이나 조직과 함께할 때 어떻게 풀어가는 편이었나요?</p>
-                <textarea id="conflictHandling" name="conflictHandling" placeholder="예: 협력사가 공기 단축에 반발하자 인건비 부담을 먼저 확인하고 일정을 다시 제안했습니다."></textarea>
+                <textarea id="conflictHandling" name="conflictHandling" placeholder="예: 협력사가 공기 단축에 반발했을 때 바로 밀어붙이지 않고 인력 투입과 비용 부담을 먼저 확인했습니다. 이후 가능한 일정과 지원이 필요한 부분을 나눠서 다시 제안해 갈등이 커지지 않게 조율했습니다."></textarea>
                 <label class="observe-check"><input type="checkbox" data-observe-none="conflictHandling">같이 일하면서 볼 기회가 없었습니다.</label>
-                <div class="field-meta">
-                  <p class="hint">사례가 있다면 1~2문장으로 간단히 적어 주세요.</p>
-                </div>
               </div>
               <div class="field full">
                 <label for="jobStrength">잘한다고 느낀 점</label>
@@ -1277,10 +1268,7 @@
               <div class="field full">
                 <label for="improvementPoint">미리 알았으면 좋았을 점</label>
                 <p class="question-text"><span class="candidate-label">대상자</span>님과 일하면서 “이 부분은 조금 더 보완되면 좋겠다”고 느끼신 점이 있었나요?</p>
-                <textarea id="improvementPoint" name="improvementPoint" class="emphasis" placeholder="예: 일정이 급할 때는 확인 절차를 건너뛰는 경우가 있었습니다."></textarea>
-                <div class="field-meta">
-                  <p class="hint">있다면 1~2문장으로 간단히 적어 주세요.</p>
-                </div>
+                <textarea id="improvementPoint" name="improvementPoint" class="emphasis" placeholder="예: 일정이 급할 때 확인 절차를 빠르게 넘기려는 경우가 있었습니다. 다만 지적을 받으면 바로 확인 기준을 다시 세우고 다음 업무에는 반영하는 편이어서, 입사 후에도 초반 업무 기준을 명확히 안내하면 좋을 것 같습니다."></textarea>
               </div>
               <div class="field full">
                 <details>
@@ -1841,13 +1829,13 @@
         el.textContent = name;
       });
       const replacements = [
-        ['performanceCredit', '예: 준공 보고 때 도면은 ○○과장이, 협력사 조율은 본인이 했다고 나눠서 말했습니다.'],
-        ['unknownHandling', '예: 판단이 안 서는 부분을 먼저 말하고 관련 부서에 확인했습니다.'],
-        ['mistakeHandling', '예: 자재 발주가 누락됐을 때 본인 확인 부족을 먼저 인정하고 바로 대안을 마련했습니다.'],
-        ['feedbackHandling', '예: 그 자리에서는 수긍했고, 다음 주 계획에 지적받은 내용이 반영돼 있었습니다.'],
-        ['conflictHandling', '예: 협력사가 공기 단축에 반발하자 인건비 부담을 먼저 확인하고 일정을 다시 제안했습니다.'],
-        ['difficultSituation', '예: 지시가 확정되지 않은 초기 단계에서 방향을 잡는 데 시간이 걸렸습니다.'],
-        ['helpfulSupport', '예: 주간 단위로 확인 시점을 정해 두니까 진행이 빨라졌습니다.']
+        ['performanceCredit', '예: 준공 보고 때 도면 검토는 ○○과장이 맡았고, 협력사 조율은 본인이 맡았다고 구분해서 설명했습니다. 문제를 혼자 해결한 것처럼 말하기보다 함께 한 사람의 역할을 같이 이야기하는 편이었습니다.'],
+        ['unknownHandling', '예: 판단이 안 서는 부분을 혼자 추측해서 처리하지 않고 먼저 모르는 지점을 말했습니다. 이후 관련 부서에 확인한 뒤 확인된 내용과 아직 남은 쟁점을 나눠서 공유했습니다.'],
+        ['mistakeHandling', '예: 자재 발주가 누락됐을 때 본인 확인이 부족했다고 먼저 인정했습니다. 바로 대체 발주 가능 여부를 확인하고, 같은 문제가 반복되지 않도록 체크 항목을 추가했습니다.'],
+        ['feedbackHandling', '예: 회의 중 반대 의견을 받았을 때 바로 방어적으로 말하지 않고 이유를 끝까지 들었습니다. 다음 주 계획서에는 지적받은 확인 절차와 보고 시점이 반영돼 있었습니다.'],
+        ['conflictHandling', '예: 협력사가 공기 단축에 반발했을 때 바로 밀어붙이지 않고 인력 투입과 비용 부담을 먼저 확인했습니다. 이후 가능한 일정과 지원이 필요한 부분을 나눠서 다시 제안해 갈등이 커지지 않게 조율했습니다.'],
+        ['difficultSituation', '예: 지시가 확정되지 않은 초기 단계에서는 방향을 잡는 데 시간이 걸렸습니다. 대신 기준이 정리된 뒤에는 실행 속도가 빨라져, 초반에 우선순위와 확인 기준을 명확히 주면 더 안정적이었습니다.'],
+        ['helpfulSupport', '예: 주간 단위로 확인 시점을 정해 두니까 진행이 빨라졌습니다. 중간 점검 때 막힌 부분을 먼저 공유할 수 있어, 혼자 오래 붙잡고 있는 시간이 줄었습니다.']
       ];
       replacements.forEach(([id, placeholder]) => {
         const el = document.getElementById(id);
