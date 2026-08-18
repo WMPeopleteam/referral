@@ -6,19 +6,23 @@
   <title>우미 인재추천 센터</title>
   <style>
     :root {
-      --bg: #f4f7fb;
+      --bg: #f8fafc;
       --surface: #ffffff;
-      --surface-soft: #eef5f8;
-      --line: #d9e3ea;
-      --text: #162536;
-      --muted: #637083;
+      --surface-soft: #f1f5f9;
+      --line: #e2e8f0;
+      --line-hover: #cbd5e1;
+      --text: #0f172a;
+      --muted: #64748b;
       --accent: #005ca1;
       --accent-dark: #004578;
-      --warn: #b45309;
-      --danger: #b91c1c;
-      --ok: #047857;
-      --radius: 8px;
-      --shadow: 0 8px 28px rgba(22, 37, 54, .08);
+      --accent-light: #e0f2fe;
+      --warn: #d97706;
+      --danger: #dc2626;
+      --ok: #059669;
+      --radius: 12px;
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, .04), 0 1px 3px rgba(15, 23, 42, .04);
+      --shadow-md: 0 4px 12px rgba(15, 23, 42, .06), 0 2px 6px rgba(15, 23, 42, .04);
+      --shadow-lg: 0 10px 25px -5px rgba(15, 23, 42, .08), 0 8px 10px -6px rgba(15, 23, 42, .05);
     }
     * { box-sizing: border-box; }
     body {
@@ -28,6 +32,8 @@
       color: var(--text);
       font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", "Segoe UI", Arial, sans-serif;
       letter-spacing: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
     button, input, textarea, select { font: inherit; }
     .wrap {
@@ -60,7 +66,7 @@
       width: 104px;
       height: auto;
     }
-    .brand-title { font-size: 22px; font-weight: 800; }
+    .brand-title { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
     .brand-sub { font-size: 14px; color: #516173; margin-top: 4px; }
     .pill {
       border: 1px solid var(--line);
@@ -94,7 +100,7 @@
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-sm);
     }
     .head {
       padding: 22px 24px;
@@ -104,7 +110,7 @@
       margin: 0;
       font-size: 24px;
       line-height: 1.25;
-      letter-spacing: 0;
+      letter-spacing: -0.02em;
     }
     .lead {
       margin: 8px 0 0;
@@ -162,6 +168,7 @@
       border-color: var(--accent);
       background: var(--accent);
       color: #fff;
+      box-shadow: 0 0 0 4px var(--accent-light);
     }
     .step.done .step-num {
       border-color: var(--accent);
@@ -169,7 +176,16 @@
       color: #fff;
       font-size: 0;
     }
-    .step.done .step-num::before { content: "✓"; font-size: 13px; }
+    .step.done .step-num::before {
+      content: "";
+      display: block;
+      width: 13px;
+      height: 13px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
     .step.done::after { background: #9bc7e8; }
     form { padding: 24px; }
     .section {
@@ -184,6 +200,11 @@
       border-radius: var(--radius);
       background: #fff;
       overflow: hidden;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .section.accordion-section:not(.is-collapsed) {
+      border-color: #b7d7f0;
+      box-shadow: 0 4px 12px rgba(0, 92, 161, .08);
     }
     .section.accordion-section + .accordion-section { margin-top: 14px; }
     .accordion-section h2 { margin: 0; }
@@ -210,17 +231,18 @@
       min-width: 0;
       font-size: 16px;
       font-weight: 800;
+      letter-spacing: -0.01em;
     }
     .accordion-step {
-      width: 24px;
-      height: 24px;
-      border-radius: 999px;
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
       display: inline-grid;
       place-items: center;
       flex: 0 0 auto;
-      background: #e8f3fb;
-      color: var(--accent-dark);
-      font-size: 12px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-size: 11px;
       font-weight: 800;
     }
     .accordion-meta {
@@ -246,19 +268,26 @@
       color: var(--accent-dark);
     }
     .accordion-action {
+      display: inline-flex;
+      align-items: center;
       color: var(--muted);
+    }
+    .accordion-chevron {
+      display: block;
+      transition: transform .2s ease;
+    }
+    .accordion-section:not(.is-collapsed) .accordion-chevron {
+      transform: rotate(180deg);
     }
     .accordion-body {
       padding: 18px 18px 22px;
       border-top: 1px solid var(--line);
     }
     .accordion-section.is-collapsed .accordion-body { display: none; }
-    .accordion-section.is-collapsed .accordion-action::after { content: "펼치기"; }
-    .accordion-section:not(.is-collapsed) .accordion-action::after { content: "접기"; }
     h2 {
       margin: 0 0 12px;
       font-size: 16px;
-      letter-spacing: 0;
+      letter-spacing: -0.01em;
     }
     .grid {
       display: grid;
@@ -319,8 +348,9 @@
     input:focus, textarea:focus, select:focus {
       background: #fff;
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(15, 118, 110, .12);
+      box-shadow: 0 0 0 4px var(--accent-light);
     }
+    .field:focus-within > label { color: var(--accent-dark); }
     .hint {
       margin: 6px 0 0;
       color: #556579;
@@ -405,12 +435,19 @@
       gap: 10px;
       align-items: flex-start;
       border: 1px solid var(--line);
-      border-radius: 6px;
+      border-radius: 8px;
       background: #f8fafc;
       padding: 11px 12px;
       color: var(--text);
       font-size: 14px;
       line-height: 1.45;
+      transition: border-color .15s ease, background .15s ease;
+    }
+    .choice-card:has(input:checked) {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      font-weight: 700;
     }
     .choice-card input {
       width: 18px;
@@ -420,8 +457,21 @@
       flex: 0 0 auto;
     }
     .choice-card:hover {
-      border-color: #b7c9d6;
+      border-color: var(--line-hover);
       background: #fff;
+    }
+    .choice-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .choice-card-desc {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+    .choice-card:has(input:checked) .choice-card-desc {
+      color: var(--accent-dark);
     }
     .observation-options {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -482,10 +532,9 @@
       line-height: 1.45;
     }
     .observation-row {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: center;
-      gap: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
     .observe-check.short {
       margin-top: 0;
@@ -533,9 +582,10 @@
     }
     .strength-chip:has(input:checked),
     .strength-chip.is-checked {
-      border-color: #99d5c9;
-      background: #eefaf7;
-      color: var(--accent-dark);
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 700;
     }
     .strength-input {
       min-height: 48px;
@@ -600,7 +650,7 @@
     }
     .btn {
       border: 1px solid transparent;
-      border-radius: 6px;
+      border-radius: 8px;
       padding: 0 16px;
       min-height: 44px;
       cursor: pointer;
@@ -608,9 +658,14 @@
       color: #fff;
       font-weight: 800;
       min-width: 132px;
-      transition: background .16s ease, color .16s ease, border-color .16s ease;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+      transition: background .16s ease, color .16s ease, border-color .16s ease, box-shadow .16s ease, transform .16s ease;
     }
-    .btn:hover { background: var(--accent-dark); }
+    .btn:hover:not(:disabled) {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 92, 161, .2);
+    }
     .btn:disabled { cursor: not-allowed; background: #9aa9b6; }
     .message {
       min-height: 22px;
@@ -651,10 +706,12 @@
       line-height: 1.55;
     }
     .note p { margin: 0; }
+    .note p + p { margin-top: 8px; }
     .note ul { margin: 0; padding-left: 18px; }
     .required::after {
       content: " *";
       color: var(--danger);
+      font-weight: bold;
     }
     .readonly-warning {
       color: var(--warn);
@@ -897,6 +954,7 @@
       border: 1px solid #b7e1d7;
       border-radius: var(--radius);
       background: #f2fbf8;
+      box-shadow: var(--shadow-lg);
     }
     .complete-panel.on { display: block; }
     .complete-title {
@@ -904,6 +962,7 @@
       font-size: 20px;
       font-weight: 800;
       color: var(--accent-dark);
+      letter-spacing: -0.02em;
     }
     .complete-meta {
       margin: 10px 0 0;
@@ -1037,6 +1096,7 @@
         <div class="head">
           <div>
             <h1>인재 추천·소개 접수</h1>
+            <p class="lead">사내추천은 임직원의 경험과 네트워크를 통해 좋은 인재를 발굴하는 제도입니다.<br>직접 경험하거나 알고 있는 내용을 바탕으로 사실대로 작성해 주세요.</p>
           </div>
           <div class="stepper" aria-label="접수 단계">
             <div id="stepVerify" class="step on"><span class="step-num">1</span><span>본인 인증</span></div>
@@ -1099,14 +1159,6 @@
           <input id="refDept" name="refDept" type="hidden" required>
 
           <section class="section">
-            <h2>추천·소개 안내</h2>
-            <div class="consent" style="display:block">
-              사내추천은 임직원의 경험과 네트워크를 통해 좋은 인재를 발굴하는 제도입니다.<br>
-              직접 경험하거나 알고 있는 내용을 바탕으로 작성해 주세요. 작성해 주신 내용은 후보자를 이해하고 채용 적합성을 검토하는 데 활용됩니다.
-            </div>
-          </section>
-
-          <section class="section">
             <h2>대상자 정보</h2>
             <div class="grid">
               <div class="field">
@@ -1151,15 +1203,15 @@
               <div class="field full">
                 <label class="required"><span class="candidate-label">대상자</span>을 어떻게 알게 되셨나요</label>
                 <div class="choice-group" id="workTypeGroup">
-                  <label class="choice-card"><input type="radio" name="workTypes" value="같은 회사·조직에서 함께 근무한 적이 있습니다"><span>같은 회사·조직에서 함께 근무한 적이 있습니다.</span></label>
-                  <label class="choice-card"><input type="radio" name="workTypes" value="프로젝트나 업무를 직접 함께한 적이 있습니다"><span>프로젝트나 업무를 직접 함께한 적이 있습니다. (다른 부서·협력사·발주처 포함)</span></label>
-                  <label class="choice-card"><input type="radio" name="workTypes" value="학교·동아리·군 복무·봉사활동 등에서 같은 일을 했습니다"><span>학교·동아리·군 복무·봉사활동 등에서 같은 일을 했습니다.</span></label>
-                  <label class="choice-card"><input type="radio" name="workTypes" value="업무를 함께한 적은 없지만 개인적으로 잘 알고 지내는 사이입니다"><span>업무를 함께한 적은 없지만 개인적으로 잘 알고 지내는 사이입니다.</span></label>
-                  <label class="choice-card"><input type="radio" name="workTypes" value="지인이나 업계 네트워크를 통해 알게 되었습니다"><span>지인이나 업계 네트워크를 통해 알게 되었습니다.</span></label>
-                  <label class="choice-card"><input type="radio" name="workTypes" value="직접 잘 알지는 못하지만 검토할 만하다고 생각해 소개합니다"><span>직접 잘 알지는 못하지만 검토할 만하다고 생각해 소개합니다.</span></label>
+                  <label class="choice-card"><input type="radio" name="workTypes" value="같은 회사·조직에서 함께 근무한 적이 있습니다"><span class="choice-card-body"><span class="choice-card-title">같은 회사·조직에서 근무</span></span></label>
+                  <label class="choice-card"><input type="radio" name="workTypes" value="프로젝트나 업무를 직접 함께한 적이 있습니다"><span class="choice-card-body"><span class="choice-card-title">프로젝트·업무를 함께 수행</span><small class="choice-card-desc">다른 부서·협력사·발주처 포함</small></span></label>
+                  <label class="choice-card"><input type="radio" name="workTypes" value="학교·동아리·군 복무·봉사활동 등에서 같은 일을 했습니다"><span class="choice-card-body"><span class="choice-card-title">학교·동아리 등에서 함께 활동</span><small class="choice-card-desc">군 복무·봉사활동 등 포함</small></span></label>
+                  <label class="choice-card"><input type="radio" name="workTypes" value="업무를 함께한 적은 없지만 개인적으로 잘 알고 지내는 사이입니다"><span class="choice-card-body"><span class="choice-card-title">개인적으로 잘 아는 사이</span><small class="choice-card-desc">업무를 함께한 경험은 없음</small></span></label>
+                  <label class="choice-card"><input type="radio" name="workTypes" value="지인이나 업계 네트워크를 통해 알게 되었습니다"><span class="choice-card-body"><span class="choice-card-title">지인·업계 네트워크로 알게 됨</span></span></label>
+                  <label class="choice-card"><input type="radio" name="workTypes" value="직접 잘 알지는 못하지만 검토할 만하다고 생각해 소개합니다"><span class="choice-card-body"><span class="choice-card-title">직접 알지는 않지만 인재로 소개</span></span></label>
                 </div>
                 <input id="relation" name="relation" type="hidden">
-                <p class="hint">해당하는 것 하나를 선택해 주세요. 관계에 따라 이후 질문이 달라집니다.</p>
+                <p class="hint">관계에 따라 이후 질문이 달라집니다.</p>
               </div>
 
               <div class="field full">
@@ -1280,7 +1332,7 @@
                 <p id="recommendationReasonQuestion" class="question-text required"><span class="candidate-label">대상자</span>을 우리 회사에 추천하고 싶으신 가장 큰 이유는 무엇인가요?</p>
                 <textarea id="recommendationReasonInput" name="recommendationReasonInput" class="emphasis observation-input" required aria-label="추천하시는 이유" placeholder="예: 현장에서 문제가 생겼을 때 먼저 나서서 정리하는 모습을 여러 번 봤습니다."></textarea>
                 <div class="field-meta">
-                  <p class="hint">함께 일하면서 직접 보신 모습이나 경험을 한 가지 이상 포함해 주세요.<br>이렇게만 쓰면 확인이 어렵습니다 — <em>「성실하고 책임감이 강합니다」</em></p>
+                  <p id="recommendationReasonHint" class="hint"></p>
                   <span class="char-count" data-for="recommendationReasonInput">0자</span>
                 </div>
               </div>
@@ -1288,7 +1340,7 @@
           </section>
 
           <section class="section recommendation-only">
-            <h2>지켜본 모습</h2>
+            <h2>함께 일하며 본 모습</h2>
             <div class="grid">
               <div class="field full direct-only">
                 <div class="strength-card">
@@ -1430,12 +1482,9 @@
             <div class="timeline-row"><div class="timeline-num">3</div><div><div class="timeline-title">포상금 검토</div><div class="timeline-text">입사 및 재직 확인 기준 충족 시 지급 검토가 시작됩니다.</div></div></div>
           </div>
         </div>
-        <div class="note">
-          <h3>작성 기준</h3>
-          <p>직접 함께 일한 경험이 있다면 실제 경험을 중심으로 작성해 주세요. 직접 함께한 경험이 없더라도, 네트워크를 통해 검토할 만한 인재를 알고 있다면 소개할 수 있습니다.</p>
-        </div>
         <div class="note security-note">
-          <h3>보안 안내</h3>
+          <h3>작성 안내</h3>
+          <p>직접 함께 일한 경험이 있다면 실제 경험을 중심으로, 없더라도 검토할 만한 인재를 알고 있다면 소개해 주세요.</p>
           <p>대상자 연락처와 이메일은 피플팀 및 채용 검토 권한자에게만 제한적으로 공개됩니다.</p>
         </div>
       </aside>
@@ -1580,7 +1629,7 @@
         const remaining = otpExpiresAt - Date.now();
         if (remaining <= 0) {
           clearOtpCountdown();
-          setVerifyEmpNoHint('인증번호가 만료되었습니다. 인증번호를 다시 발송해주세요.', 'err');
+          setVerifyEmpNoHint('인증번호가 만료되었습니다. 인증번호를 다시 발송해 주세요.', 'err');
           sendCodeBtn.textContent = '재발송';
           updateSendCodeButtonState();
           return;
@@ -1759,8 +1808,12 @@
         reasonQuestion.innerHTML = `<span class="candidate-label">${escapeHtml(currentCandidateLabel())}</span>을 우리 회사에 ${actionText}하고 싶으신 가장 큰 이유는 무엇인가요?`;
       }
       if (reasonInput) reasonInput.setAttribute('aria-label', `${actionText}하시는 이유`);
+      const reasonHint = document.getElementById('recommendationReasonHint');
+      if (reasonHint) {
+        reasonHint.innerHTML = (direct || personal) ? '' : '알고 계신 경력이나 전문성, 소개할 만하다고 생각한 이유를 적어 주세요.';
+      }
       const observationTitle = document.getElementById('observationSectionTitleText');
-      if (observationTitle) observationTitle.textContent = personal ? '알고 지내며 본 모습' : '지켜본 모습';
+      if (observationTitle) observationTitle.textContent = personal ? '알고 지내며 본 모습' : '함께 일하며 본 모습';
       syncObservationField('introReason');
       updateAccordionProgress();
     }
@@ -1894,7 +1947,12 @@
         const missingId = CORE_OBSERVATION_IDS.find(id => !isCoreObservationAnswered(id));
         if (missingId) {
           const targetId = missingId === 'conflictHandling' ? 'conflictHandlingModeGroup' : missingId;
-          showRequiredAlert('지켜본 모습', document.getElementById(targetId), '각 항목마다 내용을 적거나 해당하는 선택지를 골라 주세요.');
+          showRequiredAlert('함께 일하며 본 모습', document.getElementById(targetId), '각 항목마다 내용을 적거나 해당하는 선택지를 골라 주세요.');
+          return false;
+        }
+        const jobStrengthEl = document.getElementById('jobStrength');
+        if (!jobStrengthEl.disabled && !getValue('jobStrength')) {
+          showRequiredAlert('함께 일하며 본 모습', jobStrengthEl, '특히 잘한다고 느끼신 부분을 적거나 "특별히 떠오르는 항목이 없습니다"를 선택해 주세요.');
           return false;
         }
       }
@@ -1902,7 +1960,7 @@
         const missingId = PERSONAL_OBSERVATION_IDS.find(id => !isCoreObservationAnswered(id));
         if (missingId) {
           const target = document.getElementById(missingId);
-          showRequiredAlert('지켜본 모습', target, '각 항목마다 내용을 적거나 해당하는 선택지를 골라 주세요.');
+          showRequiredAlert('함께 일하며 본 모습', target, '각 항목마다 내용을 적거나 해당하는 선택지를 골라 주세요.');
           return false;
         }
       }
@@ -1969,7 +2027,7 @@
     }
     function currentCandidateLabel() {
       const name = clean(getValue('candName'));
-      return name ? `${name}님` : '이 분';
+      return name ? `${name} 님` : '이 분';
     }
     function updateCandidateText() {
       const label = currentCandidateLabel();
@@ -1986,7 +2044,7 @@
       const phoneEl = document.getElementById('candPhone');
       const emailEl = document.getElementById('candEmail');
       const phoneDigits = normalizedPhone(phoneEl.value);
-      phoneEl.setCustomValidity(phoneDigits.length === 11 && phoneDigits.startsWith('010') ? '' : '휴대폰 번호는 010-0000-0000 형식으로 입력해주세요.');
+      phoneEl.setCustomValidity(phoneDigits.length === 11 && phoneDigits.startsWith('010') ? '' : '휴대폰 번호는 010-0000-0000 형식으로 입력해 주세요.');
       emailEl.setCustomValidity(isValidEmail(emailEl.value) ? '' : '이메일 형식이 올바르지 않습니다.');
       return !phoneEl.validationMessage && !emailEl.validationMessage;
     }
@@ -2056,57 +2114,58 @@
         form.insertBefore(relationSection, candidateSection);
       }
     }
-    function getAccordionMissingCount(title) {
+    function getAccordionChecks(title) {
       if (title === '추천인과 대상자의 관계') {
-        let count = 0;
-        if (!getCheckedValues('workTypes').length) count += 1;
-        if (isDirectMode() && !getValue('workTask')) count += 1;
-        if (isPersonalMode() && !getValue('personalKnownPeriod')) count += 1;
-        if (isPersonalMode() && !getValue('personalRelationType')) count += 1;
-        if (isPersonalMode() && !getCheckedValues('recentContact').length) count += 1;
+        const checks = [Boolean(getCheckedValues('workTypes').length)];
+        if (isDirectMode()) checks.push(Boolean(getValue('workTask')));
+        if (isPersonalMode()) {
+          checks.push(Boolean(getValue('personalKnownPeriod')));
+          checks.push(Boolean(getValue('personalRelationType')));
+          checks.push(Boolean(getCheckedValues('recentContact').length));
+        }
         const conflictTypes = getCheckedValues('conflictTypes');
-        if (!conflictTypes.length) count += 1;
-        if (conflictTypes.includes('친족') && !getValue('conflictDetail')) count += 1;
-        return count;
+        checks.push(Boolean(conflictTypes.length));
+        if (conflictTypes.includes('친족')) checks.push(Boolean(getValue('conflictDetail')));
+        return checks;
       }
       if (title === '대상자 정보') {
         validateCandidateContactFields();
-        return ['candName', ...(isIntroMode() ? [] : ['candPhone','candEmail']), 'posText'].filter(id => {
+        return ['candName', ...(isIntroMode() ? [] : ['candPhone','candEmail']), 'posText'].map(id => {
           const el = document.getElementById(id);
-          return el && !el.validity.valid;
-        }).length;
+          return Boolean(el && el.validity.valid);
+        });
       }
       if (title === '인재 소개 정보') {
-        if (!isIntroMode()) return 0;
-        return ['introReason','knownCareer'].filter(id => !getValue(id)).length;
+        if (!isIntroMode()) return [];
+        return ['introReason','knownCareer'].map(id => Boolean(getValue(id)));
       }
       if (title === '회사·직무 안내 확인') {
-        if (isIntroMode()) return 0;
-        let count = 0;
-        if (!getCheckedValues('companyGuideStatus').length) count += 1;
-        if (!getCheckedValues('candidateIntentStatus').length) count += 1;
-        return count;
+        if (isIntroMode()) return [];
+        return [Boolean(getCheckedValues('companyGuideStatus').length), Boolean(getCheckedValues('candidateIntentStatus').length)];
       }
       if (title === '추천·소개 이유') {
         const value = getValue('recommendationReasonInput');
-        return value && !isWeakTextAnswer(value) ? 0 : 1;
+        return [Boolean(value && !isWeakTextAnswer(value))];
       }
-      if (title === '지켜본 모습') {
-        if (isDirectMode()) return CORE_OBSERVATION_IDS.filter(id => !isCoreObservationAnswered(id)).length;
-        if (isPersonalMode()) return PERSONAL_OBSERVATION_IDS.filter(id => !isCoreObservationAnswered(id)).length;
-        return 0;
+      if (title === '함께 일하며 본 모습') {
+        if (isDirectMode()) {
+          const jobStrengthEl = document.getElementById('jobStrength');
+          const jobStrengthAnswered = Boolean(jobStrengthEl.disabled || getValue('jobStrength'));
+          return [...CORE_OBSERVATION_IDS.map(isCoreObservationAnswered), jobStrengthAnswered];
+        }
+        if (isPersonalMode()) return PERSONAL_OBSERVATION_IDS.map(isCoreObservationAnswered);
+        return [];
       }
       if (title === '미리 알아두면 좋을 점') {
-        return isCoreObservationAnswered('improvementPoint') ? 0 : 1;
+        return [isCoreObservationAnswered('improvementPoint')];
       }
       if (title === '확인 및 동의') {
-        return ['guarantee','directExperienceConfirm','conflictConfirm']
-          .filter(id => {
-            const el = document.getElementById(id);
-            return el && el.required && !el.checked;
-          }).length;
+        return ['guarantee','directExperienceConfirm','conflictConfirm'].map(id => {
+          const el = document.getElementById(id);
+          return Boolean(el && el.checked);
+        });
       }
-      return 0;
+      return [];
     }
     function updateAccordionProgress() {
       let visibleStep = 1;
@@ -2117,16 +2176,11 @@
         if (step && isVisible) step.textContent = String(visibleStep++);
         const status = section.querySelector('.accordion-status');
         if (!status) return;
-        if (title === '지켜본 모습') {
-          const ids = isPersonalMode() ? PERSONAL_OBSERVATION_IDS : CORE_OBSERVATION_IDS;
-          const doneCount = ids.filter(isCoreObservationAnswered).length;
-          status.textContent = `${doneCount}/${ids.length} 응답`;
-          status.classList.toggle('done', doneCount === ids.length);
-          return;
-        }
-        const missingCount = getAccordionMissingCount(title);
-        status.textContent = missingCount ? `미완료 ${missingCount}` : '완료';
-        status.classList.toggle('done', !missingCount);
+        const checks = getAccordionChecks(title);
+        const total = checks.length;
+        const done = checks.filter(Boolean).length;
+        status.textContent = total ? `${done}/${total} 작성` : '완료';
+        status.classList.toggle('done', done === total);
       });
     }
     function setReferralFormEnabled(enabled) {
@@ -2177,7 +2231,7 @@
       myReferralCount.textContent = '접수 확인';
       completePanel.classList.remove('on');
       form.style.display = '';
-      setVerifyMessage('사번을 변경하려면 다시 인증해주세요.', '');
+      setVerifyMessage('사번을 변경하려면 다시 인증해 주세요.', '');
       setVerifyEmpNoHint('회사 이메일로 인증번호가 발송됩니다.');
       sendCodeBtn.textContent = '인증번호 발송';
       updateSendCodeButtonState();
@@ -2203,7 +2257,7 @@
       setVerifyMessage('', '');
       setVerifyEmpNoHint('회사 이메일로 인증번호가 발송됩니다.');
       if (!empNo) {
-        setVerifyMessage('사번을 입력해주세요.', 'err');
+        setVerifyMessage('사번을 입력해 주세요.', 'err');
         updateSendCodeButtonState();
         return;
       }
@@ -2219,13 +2273,13 @@
         clearOtpCountdown();
         const message = String(err && err.message || '');
         if (message.includes('Unknown action') || message.includes('unknown_action')) {
-          setVerifyEmpNoHint('인증 기능이 아직 Apps Script 배포본에 반영되지 않았습니다.', 'err');
+          setVerifyEmpNoHint('인증번호 발송 중 문제가 발생했습니다. 잠시 후 다시 시도하거나 피플팀에 문의해 주세요.', 'err');
         } else if (message.includes('employee_email_missing')) {
-          setVerifyEmpNoHint('면접관 DB 또는 인증 DB에 회사 이메일이 없거나 형식이 올바르지 않습니다. 피플팀에 확인해주세요.', 'err');
+          setVerifyEmpNoHint('사번에 등록된 회사 이메일을 확인할 수 없습니다. 피플팀에 문의해 주세요.', 'err');
         } else if (message.includes('mail_send_failed')) {
-          setVerifyEmpNoHint('메일 발송 권한이 승인되지 않았거나 Apps Script 배포 권한 문제가 있습니다. 스크립트에서 MailApp 권한 승인 후 새 버전으로 배포해주세요.', 'err');
+          setVerifyEmpNoHint('인증번호 발송 중 문제가 발생했습니다. 잠시 후 다시 시도하거나 피플팀에 문의해 주세요.', 'err');
         } else {
-          setVerifyEmpNoHint('인증번호 발송 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.', 'err');
+          setVerifyEmpNoHint('인증번호 발송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.', 'err');
         }
       } finally {
         sendCodeBtn.dataset.busy = '0';
@@ -2238,7 +2292,7 @@
       const code = getValue('verifyCode');
       setVerifyMessage('', '');
       if (!empNo || code.length !== 6) {
-        setVerifyMessage('사번과 6자리 인증번호를 입력해주세요.', 'err');
+        setVerifyMessage('사번과 6자리 인증번호를 입력해 주세요.', 'err');
         updateVerifyCodeButtonState();
         return;
       }
@@ -2523,9 +2577,6 @@
       const button = section.querySelector('.accordion-toggle');
       if (button) button.setAttribute('aria-expanded', open ? 'true' : 'false');
     }
-    function expandFormAccordions() {
-      form.querySelectorAll('.accordion-section').forEach(section => setAccordionOpen(section, true));
-    }
     function resetFormAccordions() {
       form.querySelectorAll('.accordion-section').forEach((section, index) => {
         setAccordionOpen(section, index === 0);
@@ -2538,7 +2589,7 @@
         '인재 소개 정보': '3',
         '회사·직무 안내 확인': '3',
         '추천·소개 이유': '4',
-        '지켜본 모습': '5',
+        '함께 일하며 본 모습': '5',
         '미리 알아두면 좋을 점': '6',
         '확인 및 동의': '7'
       };
@@ -2558,10 +2609,10 @@
         button.type = 'button';
         button.className = 'accordion-toggle';
         button.setAttribute('aria-expanded', 'true');
-        const titleIdAttr = title === '지켜본 모습' ? ' id="observationSectionTitleText"' : '';
+        const titleIdAttr = title === '함께 일하며 본 모습' ? ' id="observationSectionTitleText"' : '';
         button.innerHTML = `
           <span class="accordion-title"><span class="accordion-step">${steps[title]}</span><span${titleIdAttr}>${escapeHtml(title)}</span></span>
-          <span class="accordion-meta" aria-hidden="true"><span class="accordion-status">미완료</span><span class="accordion-action"></span></span>
+          <span class="accordion-meta"><span class="accordion-status">미완료</span><span class="accordion-action" aria-hidden="true"><svg class="accordion-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
         `;
         button.addEventListener('click', () => {
           setAccordionOpen(section, section.classList.contains('is-collapsed'));
@@ -2591,7 +2642,6 @@
         showRequiredAlert('사내 직원 사번 인증', verifyEmpNoEl, '사내 직원 사번 인증을 먼저 완료해 주세요.');
         return;
       }
-      expandFormAccordions();
       syncRelationField();
       syncEntryMode();
       validateCandidateContactFields();
@@ -2615,7 +2665,7 @@
         showCompletion(row);
       } catch (err) {
         console.error(err);
-        setMessage('접수 저장에 실패했습니다. 잠시 후 다시 시도하거나 피플팀에 문의해주세요.', 'err');
+        setMessage('접수 저장에 실패했습니다. 잠시 후 다시 시도하거나 피플팀에 문의해 주세요.', 'err');
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = '최종 제출';
