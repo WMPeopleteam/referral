@@ -493,6 +493,12 @@
       font-size: 13px;
       white-space: nowrap;
     }
+    .observe-check-stack {
+      display: grid;
+      gap: 6px;
+      align-content: center;
+    }
+    .observe-check-stack .observe-check.short { margin-top: 0; }
     .strength-card {
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -545,8 +551,11 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .period-selects {
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 8px;
+    }
+    .period-selects select {
+      padding: 0 8px;
     }
     .period-item {
       display: grid;
@@ -685,6 +694,8 @@
       overflow: hidden;
     }
     .verify-panel.is-hidden { display: none; }
+    .is-hidden { display: none !important; }
+    details > summary { cursor: pointer; }
     .auth-split {
       display: grid;
       grid-template-columns: minmax(170px, .34fr) minmax(460px, 1fr);
@@ -1130,7 +1141,6 @@
               </div>
               <div class="field full">
                 <p class="hint recommendation-only">이력서 및 포트폴리오는 대상자 정식 지원 단계에서 별도로 제출합니다.</p>
-                <p class="hint intro-only">인재소개 경로에서는 연락처를 받지 않습니다. 피플팀이 채용 안내 링크를 드리면 추천인이 전달하고, 대상자가 관심이 있을 때 직접 정보를 남깁니다.</p>
               </div>
             </div>
           </section>
@@ -1138,12 +1148,11 @@
           <section class="section">
             <h2>추천인과 대상자의 관계</h2>
             <div class="grid">
-              <div class="subsection-title">관계 확인</div>
               <div class="field full">
-                <label class="required"><span class="candidate-label">대상자</span>님을 어떻게 알게 되셨나요</label>
+                <label class="required"><span class="candidate-label">대상자</span>을 어떻게 알게 되셨나요</label>
                 <div class="choice-group" id="workTypeGroup">
                   <label class="choice-card"><input type="radio" name="workTypes" value="같은 회사·조직에서 함께 근무한 적이 있습니다"><span>같은 회사·조직에서 함께 근무한 적이 있습니다.</span></label>
-                  <label class="choice-card"><input type="radio" name="workTypes" value="프로젝트나 업무를 직접 함께한 적이 있습니다"><span>프로젝트나 업무를 직접 함께한 적이 있습니다.</span></label>
+                  <label class="choice-card"><input type="radio" name="workTypes" value="프로젝트나 업무를 직접 함께한 적이 있습니다"><span>프로젝트나 업무를 직접 함께한 적이 있습니다. (다른 부서·협력사·발주처 포함)</span></label>
                   <label class="choice-card"><input type="radio" name="workTypes" value="학교·동아리·군 복무·봉사활동 등에서 같은 일을 했습니다"><span>학교·동아리·군 복무·봉사활동 등에서 같은 일을 했습니다.</span></label>
                   <label class="choice-card"><input type="radio" name="workTypes" value="업무를 함께한 적은 없지만 개인적으로 잘 알고 지내는 사이입니다"><span>업무를 함께한 적은 없지만 개인적으로 잘 알고 지내는 사이입니다.</span></label>
                   <label class="choice-card"><input type="radio" name="workTypes" value="지인이나 업계 네트워크를 통해 알게 되었습니다"><span>지인이나 업계 네트워크를 통해 알게 되었습니다.</span></label>
@@ -1162,12 +1171,11 @@
                 <p class="hint">친족이어도 추천이 제한되지 않습니다. 채용 후 배치 및 평가의 공정성을 확인하기 위한 항목입니다.</p>
               </div>
 
-              <div class="field">
-                <label for="conflictDetail">가족·친족 관계</label>
+              <div class="field is-hidden" id="conflictDetailField">
+                <label id="conflictDetailLabel" for="conflictDetail">가족·친족 관계</label>
                 <input id="conflictDetail" name="conflictDetail" placeholder="예: 사촌, 처남, 조카">
               </div>
 
-              <div class="subsection-title direct-only">같이 일한 내용</div>
               <div class="field full direct-only">
                 <label class="required" for="workTask">같이 한 일</label>
                 <textarea id="workTask" name="workTask" class="compact" required placeholder="예: 2024년 ○○현장 골조공사에서 대상자는 공무, 추천인은 안전관리로 협업"></textarea>
@@ -1196,7 +1204,6 @@
                 </div>
               </div>
 
-              <div class="subsection-title personal-only">알고 지낸 관계</div>
               <div class="field personal-only">
                 <label class="required" for="personalKnownPeriod">알고 지낸 기간</label>
                 <select id="personalKnownPeriod" name="personalKnownPeriod">
@@ -1234,30 +1241,12 @@
             <h2>인재 소개 정보</h2>
             <div class="grid">
               <div class="field full">
-                <label class="required" for="introReason">어떻게 알게 되셨나요</label>
-                <p class="question-text">알게 된 경로나 소개받은 맥락을 간단히 적어 주세요.</p>
-                <textarea id="introReason" name="introReason" class="compact" placeholder="예: 협력사 지인을 통해 ○○ 분야 경력이 좋다고 들었습니다."></textarea>
-                <div class="field-meta">
-                  <p class="hint">직접 확인하지 않은 내용은 전해 들은 내용임을 구분해 주세요.</p>
-                </div>
+                <p class="question-text required">알게 된 경로나 소개받은 맥락을 간단히 적어 주세요.</p>
+                <textarea id="introReason" name="introReason" class="compact" aria-label="어떻게 알게 되셨나요" placeholder="예: 협력사 지인을 통해 ○○ 분야 경력이 좋다고 들었습니다."></textarea>
               </div>
               <div class="field full">
-                <label class="required" for="knownCareer">경력·전문 분야</label>
-                <p class="question-text">경력·자격·전문 분야에 대해 알고 계신 내용이 있으신가요?</p>
-                <textarea id="knownCareer" name="knownCareer" class="compact" placeholder="예: 토목 현장 공무 경력이 있고, 관련 자격을 보유한 것으로 알고 있습니다. 들은 이야기입니다."></textarea>
-                <div class="field-meta">
-                  <p class="hint">아시는 범위에서만 적어 주세요.</p>
-                </div>
-              </div>
-              <div class="field full">
-                <label class="required" for="referenceSourceStatus">이 분께 채용 안내를 전달하실 수 있나요</label>
-                <select id="referenceSourceStatus" name="referenceSourceStatus">
-                  <option value="">선택</option>
-                  <option>제가 직접 전달할 수 있습니다</option>
-                  <option>다른 분을 통해 전달할 수 있습니다</option>
-                  <option>전달할 방법이 마땅치 않습니다</option>
-                </select>
-                <p class="hint">피플팀이 채용 안내 링크를 드리면 전달해 주세요. 회사가 먼저 연락하지 않습니다.</p>
+                <p class="question-text required">경력·자격·전문 분야에 대해 알고 계신 내용이 있으신가요?</p>
+                <textarea id="knownCareer" name="knownCareer" class="compact" aria-label="경력·전문 분야" placeholder="예: 토목 현장 공무 경력이 있고, 관련 자격을 보유한 것으로 알고 있습니다. 들은 이야기입니다."></textarea>
               </div>
             </div>
           </section>
@@ -1281,9 +1270,6 @@
                   <label class="choice-card"><input type="radio" name="candidateIntentStatus" value="아직 여쭤보지 못했습니다"><span>아직 여쭤보지 못했습니다.</span></label>
                 </div>
               </div>
-              <div class="field full">
-                <div id="requirementStatus" class="status-note" aria-live="polite"></div>
-              </div>
             </div>
           </section>
 
@@ -1291,69 +1277,22 @@
             <h2>추천·소개 이유</h2>
             <div class="grid">
               <div class="field full">
-                <label id="recommendationReasonLabel" class="required" for="recommendationReasonInput">추천하시는 이유</label>
-                <p id="recommendationReasonQuestion" class="question-text"><span class="candidate-label">대상자</span>님을 우리 회사에 추천하고 싶으신 가장 큰 이유는 무엇인가요?</p>
-                <textarea id="recommendationReasonInput" name="recommendationReasonInput" class="emphasis" required placeholder="예: 현장에서 문제가 생겼을 때 먼저 나서서 정리하는 모습을 여러 번 봤습니다. 우리 현장에도 그런 사람이 필요하다고 생각했습니다."></textarea>
+                <p id="recommendationReasonQuestion" class="question-text required"><span class="candidate-label">대상자</span>을 우리 회사에 추천하고 싶으신 가장 큰 이유는 무엇인가요?</p>
+                <textarea id="recommendationReasonInput" name="recommendationReasonInput" class="emphasis observation-input" required aria-label="추천하시는 이유" placeholder="예: 현장에서 문제가 생겼을 때 먼저 나서서 정리하는 모습을 여러 번 봤습니다."></textarea>
                 <div class="field-meta">
-                  <p class="hint">직접 보신 경험, 알고 계신 성향, 검토할 만하다고 생각한 경력·전문성 중 하나만 적어 주셔도 됩니다.</p>
+                  <p class="hint">함께 일하면서 직접 보신 모습이나 경험을 한 가지 이상 포함해 주세요.<br>이렇게만 쓰면 확인이 어렵습니다 — <em>「성실하고 책임감이 강합니다」</em></p>
                   <span class="char-count" data-for="recommendationReasonInput">0자</span>
                 </div>
               </div>
             </div>
           </section>
 
-          <section class="section direct-only">
-            <h2>함께 일하며 본 모습</h2>
+          <section class="section recommendation-only">
+            <h2>지켜본 모습</h2>
             <div class="grid">
-              <div class="field full">
-                <div class="observation-card">
-                  <div class="observation-head">
-                    <p class="observation-question">같이 일할 때 다른 사람의 의견을 듣거나 도움을 주고받는 모습은 어땠나요?</p>
-                    <details class="observation-example">
-                      <summary>예시 보기</summary>
-                      <p>예: 회의 때 다른 사람 의견을 먼저 듣고, 본인이 맡은 일과 동료가 도와준 부분을 구분해 이야기했습니다.</p>
-                    </details>
-                  </div>
-                  <div class="observation-row">
-                    <textarea id="performanceCredit" name="performanceCredit" class="observation-input" aria-label="같이 일할 때 다른 사람의 의견을 듣거나 도움을 주고받는 모습은 어땠나요?"></textarea>
-                    <label class="observe-check short"><input type="checkbox" data-observe-none="performanceCredit">확인 어려움</label>
-                  </div>
-                </div>
-              </div>
-              <div class="field full">
-                <div class="observation-card">
-                  <div class="observation-head">
-                    <p class="observation-question">일을 맡으면 보통 어떻게 해나가는 편이었나요? 기억나는 사례가 있다면 적어 주세요.</p>
-                    <details class="observation-example">
-                      <summary>예시 보기</summary>
-                      <p>예: 처음에는 확인을 많이 하는 편이었지만, 맡은 일은 담당자에게 다시 물어보면서 끝까지 정리했습니다.</p>
-                    </details>
-                  </div>
-                  <div class="observation-row">
-                    <textarea id="proactiveCompletion" name="proactiveCompletion" class="observation-input" aria-label="일을 맡으면 보통 어떻게 해나가는 편이었나요? 기억나는 사례가 있다면 적어 주세요."></textarea>
-                    <label class="observe-check short"><input type="checkbox" data-observe-none="proactiveCompletion">확인 어려움</label>
-                  </div>
-                </div>
-              </div>
-              <div class="field full">
-                <div class="observation-card">
-                  <div class="observation-head">
-                    <p class="observation-question">다른 사람과 의견이 맞지 않을 때는 어떻게 풀어가는 편이었나요?</p>
-                    <details class="observation-example">
-                      <summary>예시 보기</summary>
-                      <p>예: 의견이 맞지 않을 때 바로 결론을 내기보다 상대가 걱정하는 부분을 먼저 확인하고, 가능한 일정과 지원이 필요한 부분을 나눠 다시 이야기했습니다.</p>
-                    </details>
-                  </div>
-                  <div class="observation-row">
-                    <textarea id="conflictHandling" name="conflictHandling" class="observation-input" aria-label="다른 사람과 의견이 맞지 않을 때는 어떻게 풀어가는 편이었나요?"></textarea>
-                    <label class="observe-check short"><input type="checkbox" data-observe-none="conflictHandling">확인 어려움</label>
-                  </div>
-                </div>
-              </div>
-              <div class="field full">
+              <div class="field full direct-only">
                 <div class="strength-card">
-                  <label for="jobStrength">특히 잘한다고 느끼신 부분</label>
-                  <p class="question-text">같이 일하면서 <span class="candidate-label">대상자</span>님이 특히 잘한다고 느끼신 부분이 있나요?</p>
+                  <p class="question-text required"><span class="candidate-label">대상자</span>이 특히 잘한다고 느끼신 부분이 있나요? (여러 개 선택 가능)</p>
                   <div class="strength-tags">
                     <label class="strength-chip"><input type="checkbox" name="jobStrengthTypes" value="업무 이해"><span>업무 이해</span></label>
                     <label class="strength-chip"><input type="checkbox" name="jobStrengthTypes" value="문제 해결"><span>문제 해결</span></label>
@@ -1361,95 +1300,83 @@
                     <label class="strength-chip"><input type="checkbox" name="jobStrengthTypes" value="실행·추진"><span>실행·추진</span></label>
                     <label class="strength-chip"><input type="checkbox" name="jobStrengthTypes" value="보고·소통"><span>보고·소통</span></label>
                     <label class="strength-chip"><input type="checkbox" name="jobStrengthTypes" value="기타"><span>기타</span></label>
-                    <label class="strength-chip"><input type="checkbox" name="jobStrengthTypes" value="판단하기 어려움"><span>판단하기 어려움</span></label>
+                    <label class="strength-chip"><input type="checkbox" name="jobStrengthTypes" value="특별히 떠오르는 항목이 없습니다"><span>특별히 떠오르는 항목이 없습니다</span></label>
                   </div>
-                  <textarea id="jobStrength" name="jobStrength" class="strength-input" placeholder="예: 도면 변경 내용을 빠르게 이해하고 협력사에 필요한 부분만 정확히 전달했습니다."></textarea>
+                  <textarea id="jobStrength" name="jobStrength" class="strength-input" style="margin-top:8px" aria-label="특히 잘한다고 느끼신 부분" placeholder="예: 도면 변경 내용을 빠르게 이해하고 협력사에 필요한 부분만 정확히 전달했습니다."></textarea>
                 </div>
               </div>
-              <div class="field full">
-                <details>
-                  <summary>모르는 일·실수·지적받았을 때 (선택)</summary>
-                  <div class="grid" style="margin-top:12px">
-                    <div class="field full">
-                      <div class="observation-card">
-                        <div class="observation-head">
-                          <p class="observation-question">잘 모르거나 확신이 없는 일이 있을 때 어떻게 하는 편이었나요?</p>
-                          <details class="observation-example">
-                            <summary>예시 보기</summary>
-                            <p>예: 판단이 안 서는 부분을 먼저 말하고 관련 부서에 확인했습니다.</p>
-                          </details>
-                        </div>
-                        <textarea id="unknownHandling" name="unknownHandling" class="observation-input" aria-label="잘 모르거나 확신이 없는 일이 있을 때 어떻게 하는 편이었나요?"></textarea>
-                      </div>
-                    </div>
-                    <div class="field full">
-                      <div class="observation-card">
-                        <div class="observation-head">
-                          <p class="observation-question">실수나 문제가 생겼을 때 어떻게 대응하는 편이었나요?</p>
-                          <details class="observation-example">
-                            <summary>예시 보기</summary>
-                            <p>예: 자재 발주가 누락됐을 때 본인 확인 부족을 먼저 인정하고 바로 대안을 마련했습니다.</p>
-                          </details>
-                        </div>
-                        <textarea id="mistakeHandling" name="mistakeHandling" class="observation-input" aria-label="실수나 문제가 생겼을 때 어떻게 대응하는 편이었나요?"></textarea>
-                      </div>
-                    </div>
-                    <div class="field full">
-                      <div class="observation-card">
-                        <div class="observation-head">
-                          <p class="observation-question">반대 의견이나 지적을 받았을 때 어떻게 반응하는 편이었나요?</p>
-                          <details class="observation-example">
-                            <summary>예시 보기</summary>
-                            <p>예: 그 자리에서는 수긍했고, 다음 주 계획에 지적받은 내용이 반영돼 있었습니다.</p>
-                          </details>
-                        </div>
-                        <textarea id="feedbackHandling" name="feedbackHandling" class="observation-input" aria-label="반대 의견이나 지적을 받았을 때 어떻게 반응하는 편이었나요?"></textarea>
-                      </div>
+              <div class="field full direct-only">
+                <div class="observation-card">
+                  <div class="observation-head">
+                    <p class="observation-question">다시 같이 일하게 된다면 어떤 일이나 역할을 맡기고 싶으신가요?</p>
+                  </div>
+                  <div class="observation-row">
+                    <textarea id="performanceCredit" name="performanceCredit" class="observation-input" aria-label="다시 같이 일하게 된다면 어떤 일이나 역할을 맡기고 싶으신가요?"></textarea>
+                    <label class="observe-check short"><input type="checkbox" data-observe-none="performanceCredit">특별히 떠오르는 역할이 없습니다</label>
+                  </div>
+                </div>
+              </div>
+              <div class="field full direct-only">
+                <div class="observation-card">
+                  <div class="observation-head">
+                    <p class="observation-question">같이 일하면서 기억에 남는 행동이나 상황이 있었나요?</p>
+                  </div>
+                  <div class="observation-row">
+                    <textarea id="proactiveCompletion" name="proactiveCompletion" class="observation-input" aria-label="같이 일하면서 기억에 남는 행동이나 상황이 있었나요?"></textarea>
+                    <label class="observe-check short"><input type="checkbox" data-observe-none="proactiveCompletion">특별히 떠오르는 내용이 없습니다</label>
+                  </div>
+                </div>
+              </div>
+              <div class="field full direct-only">
+                <div class="observation-card">
+                  <div class="observation-head">
+                    <p class="observation-question">같이 일할 때 주변에서 주로 어떤 일이나 역할을 맡기거나 부탁하는 편이었나요?</p>
+                  </div>
+                  <div class="observation-row">
+                    <textarea id="conflictHandling" name="conflictHandling" class="observation-input" aria-label="같이 일할 때 주변에서 주로 어떤 일이나 역할을 맡기거나 부탁하는 편이었나요?"></textarea>
+                    <div class="observe-check-stack" id="conflictHandlingModeGroup">
+                      <label class="observe-check short"><input type="checkbox" data-conflict-escape="특별히 떠오르는 일이 없습니다">특별히 떠오르는 일이 없습니다</label>
+                      <label class="observe-check short"><input type="checkbox" data-conflict-escape="그런 상황을 볼 기회가 많지 않았습니다">그런 상황을 볼 기회가 많지 않았습니다</label>
                     </div>
                   </div>
-                </details>
+                </div>
+              </div>
+              <div class="field full personal-only">
+                <div class="observation-card">
+                  <div class="observation-head">
+                    <p class="observation-question">알고 지내면서 <span class="candidate-label">대상자</span>에게 주로 어떤 부탁이나 도움을 요청하셨나요?</p>
+                  </div>
+                  <div class="observation-row">
+                    <textarea id="personalHelpAsked" name="personalHelpAsked" class="observation-input" aria-label="알고 지내면서 대상자에게 주로 어떤 부탁이나 도움을 요청하셨나요?"></textarea>
+                    <label class="observe-check short"><input type="checkbox" data-observe-none="personalHelpAsked">특별히 부탁하거나 도움을 요청한 일은 없습니다.</label>
+                  </div>
+                </div>
+              </div>
+              <div class="field full personal-only">
+                <div class="observation-card">
+                  <div class="observation-head">
+                    <p class="observation-question">함께한 모임이나 활동에서 <span class="candidate-label">대상자</span>은 주로 어떤 역할을 하는 편이었나요?</p>
+                  </div>
+                  <div class="observation-row">
+                    <textarea id="personalGroupRole" name="personalGroupRole" class="observation-input" aria-label="함께한 모임이나 활동에서 대상자는 주로 어떤 역할을 하는 편이었나요?"></textarea>
+                    <label class="observe-check short"><input type="checkbox" data-observe-none="personalGroupRole">함께한 모임이나 활동이 없습니다.</label>
+                  </div>
+                </div>
               </div>
             </div>
           </section>
 
-          <section class="section direct-only">
+          <section class="section">
             <h2>미리 알아두면 좋을 점</h2>
             <div class="grid">
               <div class="field full">
-                <label for="improvementPoint">참고 사항</label>
-                <p class="question-text"><span class="candidate-label">대상자</span>님과 업무를 함께할 때 참고하면 좋을 점이 있었나요?</p>
-                <textarea id="improvementPoint" name="improvementPoint" class="emphasis" placeholder="예: 일정이 급할 때 확인 절차를 생략하는 경우가 있었습니다."></textarea>
-              </div>
-              <div class="field full">
-                <details>
-                  <summary>어려워했던 상황·잘 맞았던 방식 (선택)</summary>
-                  <div class="grid" style="margin-top:12px">
-                    <div class="field full">
-                      <div class="observation-card">
-                        <div class="observation-head">
-                          <p class="observation-question">함께 일하면서 <span class="candidate-label">대상자</span>님이 특히 어려워했던 상황이 있었나요?</p>
-                          <details class="observation-example">
-                            <summary>예시 보기</summary>
-                            <p>예: 지시가 확정되지 않은 초기 단계에서 방향을 잡는 데 시간이 걸렸습니다.</p>
-                          </details>
-                        </div>
-                        <textarea id="difficultSituation" name="difficultSituation" class="observation-input" aria-label="함께 일하면서 대상자님이 특히 어려워했던 상황이 있었나요?"></textarea>
-                      </div>
-                    </div>
-                    <div class="field full">
-                      <div class="observation-card">
-                        <div class="observation-head">
-                          <p class="observation-question"><span class="candidate-label">대상자</span>님이 일할 때 어떤 도움이나 업무 방식이 특히 잘 맞았나요?</p>
-                          <details class="observation-example">
-                            <summary>예시 보기</summary>
-                            <p>예: 주간 단위로 확인 시점을 정해 두니까 진행이 빨라졌습니다.</p>
-                          </details>
-                        </div>
-                        <textarea id="helpfulSupport" name="helpfulSupport" class="observation-input" aria-label="대상자님이 일할 때 어떤 도움이나 업무 방식이 특히 잘 맞았나요?"></textarea>
-                      </div>
-                    </div>
-                  </div>
-                </details>
+                <label class="required">아시는 범위에서, 저희가 <span class="candidate-label">대상자</span>에 대해 미리 알아두면 좋을 점이 있을까요?</label>
+                <div class="choice-group compact-check-grid">
+                  <label class="choice-card"><input type="radio" name="improvementPointChoice" value="특별히 없습니다" data-observe-none="improvementPoint" required><span>특별히 없습니다</span></label>
+                  <label class="choice-card"><input type="radio" name="improvementPointChoice" value="있습니다" data-observe-write="improvementPoint"><span>있습니다 → 아래에 적어 주세요</span></label>
+                </div>
+                <textarea id="improvementPoint" name="improvementPoint" class="observation-input is-hidden" aria-label="아시는 범위에서, 저희가 대상자에 대해 미리 알아두면 좋을 점이 있을까요?"></textarea>
+                <p class="hint">업무나 함께 일하는 방식과 관련된 내용만 적어 주세요. 건강·가족·개인사나 확인되지 않은 이야기는 적지 말아 주세요.</p>
               </div>
             </div>
           </section>
@@ -1536,14 +1463,14 @@
     const copyReceiptBtn = document.getElementById('copyReceiptBtn');
     const showMyReferralsBtn = document.getElementById('showMyReferralsBtn');
     const newReferralBtn = document.getElementById('newReferralBtn');
-    const requirementStatus = document.getElementById('requirementStatus');
     const DRAFT_KEY_PREFIX = 'woomic_referral_intake_draft_v2';
     const DRAFT_TTL_MS = 24 * 60 * 60 * 1000;
     const OTP_TTL_MS = 10 * 60 * 1000;
     let lastSyncedEntryMode = '';
-    const OBSERVATION_FIELD_IDS = ['performanceCredit','unknownHandling','mistakeHandling','feedbackHandling','conflictHandling','proactiveCompletion','jobStrength','improvementPoint','difficultSituation','helpfulSupport','introReason','knownCareer','recommendationReasonInput'];
-    const OBSERVATION_STATUS_IDS = ['performanceCredit','conflictHandling','proactiveCompletion'];
+    const OBSERVATION_FIELD_IDS = ['performanceCredit','conflictHandling','proactiveCompletion','jobStrength','improvementPoint','personalHelpAsked','personalGroupRole','introReason','knownCareer','recommendationReasonInput'];
+    const OBSERVATION_STATUS_IDS = ['performanceCredit','proactiveCompletion','personalHelpAsked','personalGroupRole','improvementPoint'];
     const CORE_OBSERVATION_IDS = ['performanceCredit', 'proactiveCompletion', 'conflictHandling'];
+    const PERSONAL_OBSERVATION_IDS = ['personalHelpAsked', 'personalGroupRole'];
     const DIRECT_RELATION_VALUES = [
       '같은 회사·조직에서 함께 근무한 적이 있습니다',
       '프로젝트나 업무를 직접 함께한 적이 있습니다',
@@ -1806,16 +1733,16 @@
         }
       });
       document.getElementById('workTask').required = direct;
+      document.getElementById('jobStrength').required = direct;
       document.getElementById('personalKnownPeriod').required = personal;
       document.getElementById('personalRelationType').required = personal;
       document.getElementById('introReason').required = intro;
       document.getElementById('knownCareer').required = intro;
-      document.getElementById('referenceSourceStatus').required = intro;
       const guaranteeText = document.getElementById('guaranteeText');
       const experienceText = document.getElementById('experienceConfirmText');
       if (guaranteeText) {
         guaranteeText.textContent = intro
-          ? '대상자의 휴대폰 번호·이메일 등 직접 연락을 위한 정보를 임의로 제공하지 않았으며, 채용 안내는 제가 전달하고 대상자가 관심이 있을 때 직접 연락정보를 남긴다는 점을 이해했습니다.'
+          ? '대상자의 휴대폰 번호·이메일 등 직접 연락을 위한 정보를 임의로 제공하지 않았으며, 대상자가 관심이 있을 때 채용사이트에서 지원서를 작성하시면 된다는 점을 이해했습니다.'
           : '추천 대상자 본인에게 사내추천 사실과 개인정보 제공에 대해 동의를 받았습니다.';
       }
       if (experienceText) {
@@ -1825,15 +1752,16 @@
             ? '제가 알고 있는 범위에서 사실대로 작성했습니다.'
             : '직접 확인하지 않은 내용은 전해 들은 내용임을 구분해 작성했습니다.';
       }
-      const reasonLabel = document.getElementById('recommendationReasonLabel');
       const reasonQuestion = document.getElementById('recommendationReasonQuestion');
+      const reasonInput = document.getElementById('recommendationReasonInput');
       const actionText = intro ? '소개' : '추천';
-      if (reasonLabel) reasonLabel.textContent = `${actionText}하시는 이유`;
       if (reasonQuestion) {
-        reasonQuestion.innerHTML = `<span class="candidate-label">${escapeHtml(currentCandidateLabel())}</span>님을 우리 회사에 ${actionText}하고 싶으신 가장 큰 이유는 무엇인가요?`;
+        reasonQuestion.innerHTML = `<span class="candidate-label">${escapeHtml(currentCandidateLabel())}</span>을 우리 회사에 ${actionText}하고 싶으신 가장 큰 이유는 무엇인가요?`;
       }
+      if (reasonInput) reasonInput.setAttribute('aria-label', `${actionText}하시는 이유`);
+      const observationTitle = document.getElementById('observationSectionTitleText');
+      if (observationTitle) observationTitle.textContent = personal ? '알고 지내며 본 모습' : '지켜본 모습';
       syncObservationField('introReason');
-      updateRequirementStatus();
       updateAccordionProgress();
     }
     function validateWorkScopeFields() {
@@ -1855,13 +1783,23 @@
         showRequiredAlert('알게 된 경로', document.getElementById('introReason'), '알게 된 경로나 소개받은 맥락을 적어 주세요.');
       } else if (isIntroMode() && !getValue('knownCareer')) {
         showRequiredAlert('경력·전문 분야', document.getElementById('knownCareer'), '경력·전문 분야를 아시는 범위에서 적어 주세요.');
-      } else if (isIntroMode() && !getValue('referenceSourceStatus')) {
-        showRequiredAlert('채용 안내 전달 가능 여부', document.getElementById('referenceSourceStatus'), '채용 안내를 전달하실 수 있는지 선택해 주세요.');
       }
       return !relationMissing
         && !workTaskMissing
         && (!isPersonalMode() || (getValue('personalKnownPeriod') && getValue('personalRelationType') && getCheckedValues('recentContact').length))
-        && (!isIntroMode() || (getValue('introReason') && getValue('knownCareer') && getValue('referenceSourceStatus')));
+        && (!isIntroMode() || (getValue('introReason') && getValue('knownCareer')));
+    }
+    function syncConflictDetailField() {
+      const isKin = getCheckedValues('conflictTypes').includes('친족');
+      const input = document.getElementById('conflictDetail');
+      const label = document.getElementById('conflictDetailLabel');
+      const field = document.getElementById('conflictDetailField');
+      if (input) {
+        input.required = isKin;
+        if (!isKin) input.value = '';
+      }
+      if (label) label.classList.toggle('required', isKin);
+      if (field) field.classList.toggle('is-hidden', !isKin);
     }
     function validateConflictFields() {
       const conflictValues = getCheckedValues('conflictTypes');
@@ -1877,11 +1815,11 @@
     }
     function getObservationStatus(id) {
       const el = document.querySelector(`input[data-observe-none="${id}"]`);
-      return el && el.checked ? '이 부분은 직접 확인할 기회가 없었습니다' : '';
+      return el && el.checked ? clean(el.closest('label')?.textContent || '') : '';
     }
     function setObservationStatus(id, value) {
       const el = document.querySelector(`input[data-observe-none="${id}"]`);
-      if (el) el.checked = value === 'Y' || value === true || value === '이 부분은 직접 확인할 기회가 없었습니다' || value === '이런 모습은 본 적이 없습니다' || value === '같이 일하면서 볼 기회가 없었습니다';
+      if (el) el.checked = Boolean(value);
     }
     function isObservationWriteChecked(id) {
       const el = document.querySelector(`input[data-observe-write="${id}"]`);
@@ -1894,7 +1832,22 @@
     function isObservationNoneChecked(id) {
       return Boolean(getObservationStatus(id));
     }
+    function getConflictHandlingMode() {
+      return document.querySelector('input[data-conflict-escape]:checked')?.dataset.conflictEscape || '';
+    }
+    function isConflictHandlingAnswered() {
+      return Boolean(getConflictHandlingMode()) || Boolean(getValue('conflictHandling'));
+    }
+    function syncConflictHandlingField() {
+      const textarea = document.getElementById('conflictHandling');
+      if (!textarea) return;
+      const escaped = Boolean(getConflictHandlingMode());
+      textarea.disabled = escaped;
+      if (escaped) textarea.value = '';
+      autoGrowTextarea(textarea);
+    }
     function isCoreObservationAnswered(id) {
+      if (id === 'conflictHandling') return isConflictHandlingAnswered();
       return isObservationNoneChecked(id) || Boolean(getValue(id));
     }
     function getObservationStatusMap() {
@@ -1925,7 +1878,7 @@
       updateCharCountFor(id);
     }
     function syncJobStrengthField() {
-      const unknownValue = '판단하기 어려움';
+      const unknownValue = '특별히 떠오르는 항목이 없습니다';
       const jobStrengthEl = document.getElementById('jobStrength');
       const unknownChecked = Boolean(document.querySelector(`input[name="jobStrengthTypes"][value="${unknownValue}"]:checked`));
       document.querySelectorAll('input[name="jobStrengthTypes"]').forEach(input => {
@@ -1937,11 +1890,24 @@
       updateCharCountFor('jobStrength');
     }
     function validateObservationFields() {
-      if (!isDirectMode()) return true;
-      const missingId = CORE_OBSERVATION_IDS.find(id => !isCoreObservationAnswered(id));
-      if (missingId) {
-        const target = document.getElementById(missingId);
-        showRequiredAlert('함께 일하며 본 모습', target, '각 항목마다 내용을 적거나 “확인 어려움”을 선택해 주세요.');
+      if (isDirectMode()) {
+        const missingId = CORE_OBSERVATION_IDS.find(id => !isCoreObservationAnswered(id));
+        if (missingId) {
+          const targetId = missingId === 'conflictHandling' ? 'conflictHandlingModeGroup' : missingId;
+          showRequiredAlert('지켜본 모습', document.getElementById(targetId), '각 항목마다 내용을 적거나 해당하는 선택지를 골라 주세요.');
+          return false;
+        }
+      }
+      if (isPersonalMode()) {
+        const missingId = PERSONAL_OBSERVATION_IDS.find(id => !isCoreObservationAnswered(id));
+        if (missingId) {
+          const target = document.getElementById(missingId);
+          showRequiredAlert('지켜본 모습', target, '각 항목마다 내용을 적거나 해당하는 선택지를 골라 주세요.');
+          return false;
+        }
+      }
+      if (!isCoreObservationAnswered('improvementPoint')) {
+        showRequiredAlert('미리 알아두면 좋을 점', document.querySelector('input[name="improvementPointChoice"]'), '해당하는 항목을 선택하고, "있습니다"를 고르셨다면 내용을 적어 주세요.');
         return false;
       }
       return true;
@@ -1988,29 +1954,6 @@
       if (actionStatus === 'MET') return 'REFERRAL_REWARD_ELIGIBLE';
       return 'REFERRAL_ACTION_INCOMPLETE';
     }
-    function updateRequirementStatus() {
-      if (!requirementStatus) return;
-      if (isIntroMode()) {
-        requirementStatus.className = 'status-note';
-        requirementStatus.textContent = '';
-        return;
-      }
-      const guide = getCheckedValues('companyGuideStatus')[0] || '';
-      const intent = getCheckedValues('candidateIntentStatus')[0] || '';
-      if (!guide && !intent) {
-        requirementStatus.className = 'status-note';
-        requirementStatus.textContent = '';
-        return;
-      }
-      const status = getActionRequirementStatus();
-      if (status === 'MET') {
-        requirementStatus.className = 'status-note on ok';
-        requirementStatus.innerHTML = '<strong>추천요건 충족</strong><br>회사·직무 안내 및 지원의사 확인이 완료되었습니다.';
-      } else {
-        requirementStatus.className = 'status-note on warn';
-        requirementStatus.innerHTML = '<strong>확인 필요</strong><br>안내가 아직이어도 접수됩니다. 다만 피플팀이 먼저 확인을 요청드릴 수 있습니다.';
-      }
-    }
     function getReferralTrackLabel(track) {
       if (track === 'DIRECT_REFERRAL') return '직접 경험 추천';
       if (track === 'PERSONAL_REFERRAL') return '지인 추천';
@@ -2025,12 +1968,13 @@
       return '';
     }
     function currentCandidateLabel() {
-      return getValue('candName') || '대상자';
+      const name = clean(getValue('candName'));
+      return name ? `${name}님` : '이 분';
     }
     function updateCandidateText() {
-      const name = currentCandidateLabel();
+      const label = currentCandidateLabel();
       document.querySelectorAll('.candidate-label').forEach(el => {
-        el.textContent = name;
+        el.textContent = label;
       });
     }
     function setText(id, value) {
@@ -2057,6 +2001,7 @@
         if (consentText) return clean(consentText);
       }
       if (el.name === 'conflictTypes') return '가족·친족 여부';
+      if (el.name === 'improvementPointChoice') return '미리 알아두면 좋을 점';
       return el.getAttribute('aria-label') || el.name || '필수 항목';
     }
     function validateVisibleRequiredFields() {
@@ -2133,7 +2078,7 @@
       }
       if (title === '인재 소개 정보') {
         if (!isIntroMode()) return 0;
-        return ['introReason','knownCareer','referenceSourceStatus'].filter(id => !getValue(id)).length;
+        return ['introReason','knownCareer'].filter(id => !getValue(id)).length;
       }
       if (title === '회사·직무 안내 확인') {
         if (isIntroMode()) return 0;
@@ -2146,12 +2091,13 @@
         const value = getValue('recommendationReasonInput');
         return value && !isWeakTextAnswer(value) ? 0 : 1;
       }
-      if (title === '함께 일하며 본 모습') {
-        if (!isDirectMode()) return 0;
-        return CORE_OBSERVATION_IDS.filter(id => !isCoreObservationAnswered(id)).length;
+      if (title === '지켜본 모습') {
+        if (isDirectMode()) return CORE_OBSERVATION_IDS.filter(id => !isCoreObservationAnswered(id)).length;
+        if (isPersonalMode()) return PERSONAL_OBSERVATION_IDS.filter(id => !isCoreObservationAnswered(id)).length;
+        return 0;
       }
       if (title === '미리 알아두면 좋을 점') {
-        return 0;
+        return isCoreObservationAnswered('improvementPoint') ? 0 : 1;
       }
       if (title === '확인 및 동의') {
         return ['guarantee','directExperienceConfirm','conflictConfirm']
@@ -2171,15 +2117,11 @@
         if (step && isVisible) step.textContent = String(visibleStep++);
         const status = section.querySelector('.accordion-status');
         if (!status) return;
-        if (title === '미리 알아두면 좋을 점') {
-          status.textContent = '선택사항';
-          status.classList.add('done');
-          return;
-        }
-        if (title === '함께 일하며 본 모습') {
-          const doneCount = isDirectMode() ? CORE_OBSERVATION_IDS.filter(isCoreObservationAnswered).length : 0;
-          status.textContent = `${doneCount}/${CORE_OBSERVATION_IDS.length} 응답`;
-          status.classList.toggle('done', doneCount === CORE_OBSERVATION_IDS.length);
+        if (title === '지켜본 모습') {
+          const ids = isPersonalMode() ? PERSONAL_OBSERVATION_IDS : CORE_OBSERVATION_IDS;
+          const doneCount = ids.filter(isCoreObservationAnswered).length;
+          status.textContent = `${doneCount}/${ids.length} 응답`;
+          status.classList.toggle('done', doneCount === ids.length);
           return;
         }
         const missingCount = getAccordionMissingCount(title);
@@ -2333,8 +2275,12 @@
       const recommendationReason = getValue('recommendationReasonInput');
       const candidateConsentAt = intro ? '' : submittedAt;
       const introPolicyAcknowledgedAt = intro ? submittedAt : '';
+      const conflictHandlingMode = direct ? getConflictHandlingMode() : '';
       const directObservationValues = direct
-        ? [getValue('performanceCredit'), getValue('unknownHandling'), getValue('mistakeHandling'), getValue('feedbackHandling'), getValue('conflictHandling'), getValue('proactiveCompletion')]
+        ? [getValue('performanceCredit'), getValue('proactiveCompletion'), conflictHandlingMode ? '' : getValue('conflictHandling')]
+        : [];
+      const personalObservationValues = personal
+        ? [getValue('personalHelpAsked'), getValue('personalGroupRole')]
         : [];
       const refItems = {
         entryType: entryMode === 'TALENT_INTRO' ? 'INTRODUCTION' : 'REFERRAL',
@@ -2354,26 +2300,23 @@
         candStatus: getValue('candStatus'),
         conflictTypes: getCheckedValues('conflictTypes'),
         conflictDetail: getValue('conflictDetail'),
-        observationStatus: direct ? getObservationStatusMap() : {},
+        observationStatus: direct || personal ? getObservationStatusMap() : {},
         performanceCredit: direct ? getValue('performanceCredit') : '',
-        unknownHandling: direct ? getValue('unknownHandling') : '',
-        mistakeHandling: direct ? getValue('mistakeHandling') : '',
-        feedbackHandling: direct ? getValue('feedbackHandling') : '',
-        conflictHandling: direct ? getValue('conflictHandling') : '',
+        conflictHandling: conflictHandlingMode ? '' : getValue('conflictHandling'),
+        conflictHandlingEscapeReason: conflictHandlingMode,
         proactiveCompletion: direct ? getValue('proactiveCompletion') : '',
+        personalHelpAsked: personal ? getValue('personalHelpAsked') : '',
+        personalGroupRole: personal ? getValue('personalGroupRole') : '',
         jobStrengthTypes: direct ? getCheckedValues('jobStrengthTypes') : [],
         jobStrength: direct ? getValue('jobStrength') : '',
-        improvementPoint: direct ? getValue('improvementPoint') : '',
-        improvementNotObserved: '',
-        difficultSituation: direct ? getValue('difficultSituation') : '',
-        helpfulSupport: direct ? getValue('helpfulSupport') : '',
+        improvementPointChoice: getCheckedValues('improvementPointChoice')[0] || '',
+        improvementPoint: getValue('improvementPoint'),
         introReason: intro ? getValue('introReason') : '',
         knownCareer: intro ? getValue('knownCareer') : '',
-        referenceSourceStatus: intro ? getValue('referenceSourceStatus') : '',
         relationshipContext: direct ? getValue('workTask') : '',
         strengths: direct ? getValue('jobStrength') : '',
-        collaborationEvidence: directObservationValues.filter(Boolean).join('\n\n'),
-        riskNotes: direct ? getValue('improvementPoint') : '',
+        collaborationEvidence: [...directObservationValues, ...personalObservationValues].filter(Boolean).join('\n\n'),
+        riskNotes: getValue('improvementPoint'),
         recommendationReason,
         candidateConsentConfirmed: !intro && document.getElementById('guarantee').checked ? 'Y' : '',
         introPolicyAcknowledged: intro && document.getElementById('guarantee').checked ? 'Y' : '',
@@ -2419,7 +2362,7 @@
       };
     }
     function draftFieldIds() {
-      return ['candName','candPhone','candEmail','candCompany','posText','candStatus','relation','workTask','workPeriodStart','workPeriodEnd','personalKnownPeriod','personalRelationType','conflictDetail','referenceSourceStatus', ...OBSERVATION_FIELD_IDS];
+      return ['candName','candPhone','candEmail','candCompany','posText','candStatus','relation','workTask','workPeriodStart','workPeriodEnd','personalKnownPeriod','personalRelationType','conflictDetail', ...OBSERVATION_FIELD_IDS];
     }
     function currentDraftKey() {
       const empNo = clean(verifiedEmployee?.empNo || getValue('refEmpNo'));
@@ -2447,6 +2390,8 @@
       data.candidateIntentStatus = getCheckedValues('candidateIntentStatus');
       data.observationStatus = getObservationStatusMap();
       data.jobStrengthTypes = getCheckedValues('jobStrengthTypes');
+      data.conflictHandlingMode = getConflictHandlingMode();
+      data.improvementPointChoice = getCheckedValues('improvementPointChoice');
       data.empNo = verifiedEmployee.empNo || getValue('refEmpNo');
       data.savedAt = new Date().toISOString();
       data.expiresAt = new Date(Date.now() + DRAFT_TTL_MS).toISOString();
@@ -2476,6 +2421,7 @@
       syncAllPeriodSelects();
       setCheckedValues('workTypes', data.workTypes);
       setCheckedValues('conflictTypes', data.conflictTypes);
+      syncConflictDetailField();
       setCheckedValues('recentContact', data.recentContact);
       setCheckedValues('companyGuideStatus', data.companyGuideStatus);
       setCheckedValues('candidateIntentStatus', data.candidateIntentStatus);
@@ -2486,6 +2432,13 @@
       OBSERVATION_STATUS_IDS.forEach(syncObservationField);
       setCheckedValues('jobStrengthTypes', data.jobStrengthTypes);
       syncJobStrengthField();
+      if (data.conflictHandlingMode) {
+        const el = document.querySelector(`input[data-conflict-escape="${data.conflictHandlingMode}"]`);
+        if (el) el.checked = true;
+      }
+      syncConflictHandlingField();
+      setCheckedValues('improvementPointChoice', data.improvementPointChoice);
+      syncObservationField('improvementPoint');
       syncRelationField();
       syncEntryMode();
       ['guarantee','directExperienceConfirm','conflictConfirm'].forEach(id => {
@@ -2585,7 +2538,7 @@
         '인재 소개 정보': '3',
         '회사·직무 안내 확인': '3',
         '추천·소개 이유': '4',
-        '함께 일하며 본 모습': '5',
+        '지켜본 모습': '5',
         '미리 알아두면 좋을 점': '6',
         '확인 및 동의': '7'
       };
@@ -2605,8 +2558,9 @@
         button.type = 'button';
         button.className = 'accordion-toggle';
         button.setAttribute('aria-expanded', 'true');
+        const titleIdAttr = title === '지켜본 모습' ? ' id="observationSectionTitleText"' : '';
         button.innerHTML = `
-          <span class="accordion-title"><span class="accordion-step">${steps[title]}</span><span>${escapeHtml(title)}</span></span>
+          <span class="accordion-title"><span class="accordion-step">${steps[title]}</span><span${titleIdAttr}>${escapeHtml(title)}</span></span>
           <span class="accordion-meta" aria-hidden="true"><span class="accordion-status">미완료</span><span class="accordion-action"></span></span>
         `;
         button.addEventListener('click', () => {
@@ -2647,7 +2601,7 @@
       if (!validateGuideFields()) return;
       if (!validateRecommendationReason()) return;
       if (!validateIntroFields()) return;
-      if (!isIntroMode() && !validateObservationFields()) return;
+      if (!validateObservationFields()) return;
       const row = buildReferralRow();
       submitBtn.disabled = true;
       submitBtn.textContent = '접수 중';
@@ -2669,7 +2623,6 @@
     });
     form.addEventListener('input', updateAccordionProgress);
     form.addEventListener('change', () => {
-      updateRequirementStatus();
       updateAccordionProgress();
     });
     sendCodeBtn.addEventListener('click', sendVerificationCode);
@@ -2718,14 +2671,17 @@
       });
     });
     document.querySelectorAll('input[name="conflictTypes"]').forEach(el => {
-      el.addEventListener('change', () => setMessage('', ''));
+      el.addEventListener('change', () => {
+        syncConflictDetailField();
+        setMessage('', '');
+      });
     });
     OBSERVATION_FIELD_IDS.forEach(id => {
       const el = document.getElementById(id);
       if (el) el.addEventListener('input', () => {
         autoGrowTextarea(el);
         updateCharCountFor(id);
-        if (CORE_OBSERVATION_IDS.includes(id)) updateAccordionProgress();
+        if (CORE_OBSERVATION_IDS.includes(id) || PERSONAL_OBSERVATION_IDS.includes(id)) updateAccordionProgress();
       });
     });
     document.querySelectorAll('input[data-observe-none], input[data-observe-write]').forEach(el => {
@@ -2735,10 +2691,22 @@
         updateAccordionProgress();
       });
     });
+    document.querySelectorAll('input[data-conflict-escape]').forEach(el => {
+      el.addEventListener('change', () => {
+        if (el.checked) {
+          document.querySelectorAll('input[data-conflict-escape]').forEach(other => {
+            if (other !== el) other.checked = false;
+          });
+        }
+        syncConflictHandlingField();
+        setMessage('', '');
+        updateAccordionProgress();
+      });
+    });
     OBSERVATION_STATUS_IDS.forEach(syncObservationField);
     document.querySelectorAll('input[name="jobStrengthTypes"]').forEach(el => {
       el.addEventListener('change', event => {
-        const unknownValue = '판단하기 어려움';
+        const unknownValue = '특별히 떠오르는 항목이 없습니다';
         if (event.target.value === unknownValue && event.target.checked) {
           document.querySelectorAll('input[name="jobStrengthTypes"]').forEach(other => {
             if (other !== event.target) other.checked = false;
@@ -2780,6 +2748,8 @@
     syncRelationField();
     syncEntryMode();
     syncJobStrengthField();
+    syncConflictHandlingField();
+    syncConflictDetailField();
     updateCandidateText();
     updateSendCodeButtonState();
     updateVerifyCodeButtonState();
