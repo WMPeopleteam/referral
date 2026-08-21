@@ -587,7 +587,8 @@
     }
     .strength-input {
       min-height: 48px;
-      resize: vertical;
+      overflow: hidden;
+      resize: none;
       margin-top: 4px;
     }
     .inline-grid {
@@ -1824,6 +1825,7 @@
       const observationTitle = document.getElementById('observationSectionTitleText');
       if (observationTitle) observationTitle.textContent = personal ? '알고 지내며 본 모습' : '함께 일하며 본 모습';
       syncObservationField('introReason');
+      autoGrowAllObservationInputs();
       updateAccordionProgress();
     }
     function validateWorkScopeFields() {
@@ -2096,12 +2098,19 @@
       OBSERVATION_FIELD_IDS.forEach(updateCharCountFor);
     }
     function autoGrowTextarea(el) {
-      if (!el || !el.classList.contains('observation-input')) return;
+      if (!el || !(el.classList.contains('observation-input') || el.classList.contains('strength-input'))) return;
+      const originalValue = el.value;
+      const measuringPlaceholder = !originalValue && el.placeholder;
+      if (measuringPlaceholder) el.value = el.placeholder;
       el.style.height = 'auto';
-      el.style.height = `${Math.max(44, el.scrollHeight)}px`;
+      const cs = getComputedStyle(el);
+      const borderY = parseFloat(cs.borderTopWidth || 0) + parseFloat(cs.borderBottomWidth || 0);
+      const height = el.scrollHeight + borderY;
+      if (measuringPlaceholder) el.value = originalValue;
+      el.style.height = `${Math.max(44, height)}px`;
     }
     function autoGrowAllObservationInputs() {
-      document.querySelectorAll('textarea.observation-input').forEach(autoGrowTextarea);
+      document.querySelectorAll('textarea.observation-input, textarea.strength-input').forEach(autoGrowTextarea);
     }
     function getSectionByTitle(title) {
       return [...form.querySelectorAll(':scope > .section')].find(section => {
@@ -2601,7 +2610,9 @@
           <span class="accordion-meta"><span class="accordion-status">미완료</span><span class="accordion-action" aria-hidden="true"><svg class="accordion-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
         `;
         button.addEventListener('click', () => {
-          setAccordionOpen(section, section.classList.contains('is-collapsed'));
+          const opening = section.classList.contains('is-collapsed');
+          setAccordionOpen(section, opening);
+          if (opening) autoGrowAllObservationInputs();
         });
 
         heading.textContent = '';
