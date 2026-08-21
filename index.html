@@ -1381,30 +1381,17 @@
                     <label class="strength-chip"><input type="checkbox" name="jobStrengthTypes" value="실행·추진"><span>실행·추진</span></label>
                     <label class="strength-chip"><input type="checkbox" name="jobStrengthTypes" value="보고·소통"><span>보고·소통</span></label>
                     <label class="strength-chip"><input type="checkbox" name="jobStrengthTypes" value="기타"><span>기타</span></label>
-                    <label class="strength-chip"><input type="checkbox" name="jobStrengthTypes" value="특별히 떠오르는 항목이 없습니다"><span>특별히 떠오르는 항목이 없습니다</span></label>
                   </div>
-                  <textarea id="jobStrength" name="jobStrength" class="strength-input" style="margin-top:8px" aria-label="특히 잘한다고 느끼신 부분" placeholder="예: 도면 변경 내용을 빠르게 이해하고 협력사에 필요한 부분만 정확히 전달했습니다."></textarea>
+                  <textarea id="jobStrength" name="jobStrength" class="strength-input" style="margin-top:8px" aria-label="특히 잘한다고 느끼신 부분" placeholder="예: 도면이나 지시사항이 바뀌어도 핵심을 빠르게 파악하고, 관련 부서·협력사에 필요한 부분만 정확히 짚어 전달하는 편입니다."></textarea>
                 </div>
               </div>
               <div class="field full direct-only">
                 <div class="observation-card">
                   <div class="observation-head">
-                    <p class="observation-question">다시 같이 일하게 된다면 어떤 일이나 역할을 맡기고 싶으신가요?</p>
+                    <p class="observation-question">그 강점이 잘 드러났던 행동이나 상황이 있다면 알려주세요.</p>
                   </div>
                   <div class="observation-row">
-                    <textarea id="performanceCredit" name="performanceCredit" class="observation-input" aria-label="다시 같이 일하게 된다면 어떤 일이나 역할을 맡기고 싶으신가요?"></textarea>
-                    <label class="observe-check short"><input type="checkbox" data-observe-none="performanceCredit">특별히 떠오르는 역할이 없습니다</label>
-                  </div>
-                </div>
-              </div>
-              <div class="field full direct-only">
-                <div class="observation-card">
-                  <div class="observation-head">
-                    <p class="observation-question">함께 일하면서 기억에 남는 행동이나 상황이 있었나요?</p>
-                  </div>
-                  <div class="observation-row">
-                    <textarea id="proactiveCompletion" name="proactiveCompletion" class="observation-input" aria-label="함께 일하면서 기억에 남는 행동이나 상황이 있었나요?"></textarea>
-                    <label class="observe-check short"><input type="checkbox" data-observe-none="proactiveCompletion">특별히 떠오르는 내용이 없습니다</label>
+                    <textarea id="performanceCredit" name="performanceCredit" class="observation-input" aria-label="그 강점이 잘 드러났던 행동이나 상황이 있다면 알려주세요." placeholder="예: 착공 전날 설계 변경 통보가 왔을 때, 밤늦게 남아 변경된 물량을 다시 산출해서 협력사에 정확히 전달했고 재작업 없이 일정을 맞춘 적이 있습니다."></textarea>
                   </div>
                 </div>
               </div>
@@ -1414,11 +1401,17 @@
                     <p class="observation-question">같이 일할 때 주변 사람들이 <span class="candidate-label">대상자</span>에게 주로 어떤 일이나 역할을 맡기거나 부탁했나요?</p>
                   </div>
                   <div class="observation-row">
-                    <textarea id="conflictHandling" name="conflictHandling" class="observation-input" aria-label="같이 일할 때 주변 사람들이 이 분에게 주로 어떤 일이나 역할을 맡기거나 부탁했나요?"></textarea>
-                    <div class="observe-check-stack" id="conflictHandlingModeGroup">
-                      <label class="observe-check short"><input type="checkbox" data-conflict-escape="특별히 떠오르는 일이 없습니다">특별히 떠오르는 일이 없습니다</label>
-                      <label class="observe-check short"><input type="checkbox" data-conflict-escape="그런 상황을 볼 기회가 많지 않았습니다">그런 상황을 볼 기회가 많지 않았습니다</label>
-                    </div>
+                    <textarea id="conflictHandling" name="conflictHandling" class="observation-input" aria-label="같이 일할 때 주변 사람들이 이 분에게 주로 어떤 일이나 역할을 맡기거나 부탁했나요?" placeholder="예: 여러 협력사 일정이 겹쳐 조율이 필요할 때, 동료들이 먼저 찾아와 일정 정리를 부탁하는 경우가 많았습니다."></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="field full direct-only">
+                <div class="observation-card">
+                  <div class="observation-head">
+                    <p class="observation-question">함께 일할 때 조금 더 보완하면 좋겠다고 느꼈던 부분이 있었나요?</p>
+                  </div>
+                  <div class="observation-row">
+                    <textarea id="watchPoint" name="watchPoint" class="observation-input" aria-label="함께 일할 때 조금 더 보완하면 좋겠다고 느꼈던 부분이 있었나요?" placeholder="예: 협력사에 요구사항을 전달할 때 초반 설명이 간략해서, 진행 중에 다시 확인하는 과정이 몇 번 있었습니다."></textarea>
                   </div>
                 </div>
               </div>
@@ -1428,8 +1421,7 @@
                     <p class="observation-question">알고 지내면서 <span class="candidate-label">대상자</span>에게 주로 어떤 부탁이나 도움을 요청하셨나요?</p>
                   </div>
                   <div class="observation-row">
-                    <textarea id="personalHelpAsked" name="personalHelpAsked" class="observation-input" aria-label="알고 지내면서 대상자에게 주로 어떤 부탁이나 도움을 요청하셨나요?"></textarea>
-                    <label class="observe-check short"><input type="checkbox" data-observe-none="personalHelpAsked">특별히 부탁하거나 도움을 요청한 일은 없습니다.</label>
+                    <textarea id="personalHelpAsked" name="personalHelpAsked" class="observation-input" aria-label="알고 지내면서 대상자에게 주로 어떤 부탁이나 도움을 요청하셨나요?" placeholder="예: 이직을 고민할 때 이 분에게 진로 상담을 요청한 적이 있고, 이사할 때도 도움을 요청한 적이 있습니다."></textarea>
                   </div>
                 </div>
               </div>
@@ -1439,25 +1431,9 @@
                     <p class="observation-question">함께한 모임이나 활동에서 <span class="candidate-label">대상자</span>은 주로 어떤 역할을 하는 편이었나요?</p>
                   </div>
                   <div class="observation-row">
-                    <textarea id="personalGroupRole" name="personalGroupRole" class="observation-input" aria-label="함께한 모임이나 활동에서 대상자는 주로 어떤 역할을 하는 편이었나요?"></textarea>
-                    <label class="observe-check short"><input type="checkbox" data-observe-none="personalGroupRole">함께한 모임이나 활동이 없습니다.</label>
+                    <textarea id="personalGroupRole" name="personalGroupRole" class="observation-input" aria-label="함께한 모임이나 활동에서 대상자는 주로 어떤 역할을 하는 편이었나요?" placeholder="예: 동호회 모임에서 항상 먼저 나서서 일정을 잡고 참석자들을 챙기는 역할을 했습니다."></textarea>
                   </div>
                 </div>
-              </div>
-            </div>
-          </section>
-
-          <section class="section">
-            <h2>미리 알아두면 좋을 점</h2>
-            <div class="grid">
-              <div class="field full">
-                <label class="required">아시는 범위에서, 저희가 <span class="candidate-label">대상자</span>에 대해 미리 알아두면 좋을 점이 있을까요?</label>
-                <div class="choice-group compact-check-grid">
-                  <label class="choice-card"><input type="radio" name="improvementPointChoice" value="특별히 없습니다" data-observe-none="improvementPoint" required><span>특별히 없습니다</span></label>
-                  <label class="choice-card"><input type="radio" name="improvementPointChoice" value="있습니다" data-observe-write="improvementPoint"><span>있습니다 → 아래에 적어 주세요</span></label>
-                </div>
-                <textarea id="improvementPoint" name="improvementPoint" class="observation-input is-hidden" aria-label="아시는 범위에서, 저희가 대상자에 대해 미리 알아두면 좋을 점이 있을까요?"></textarea>
-                <p class="hint">업무나 함께 일하는 방식과 관련된 내용만 적어 주세요. 건강·가족·개인사나 확인되지 않은 이야기는 적지 말아 주세요.</p>
               </div>
             </div>
           </section>
@@ -1545,10 +1521,11 @@
     const DRAFT_TTL_MS = 24 * 60 * 60 * 1000;
     const OTP_TTL_MS = 10 * 60 * 1000;
     let lastSyncedEntryMode = '';
-    const OBSERVATION_FIELD_IDS = ['performanceCredit','conflictHandling','proactiveCompletion','jobStrength','improvementPoint','personalHelpAsked','personalGroupRole','introReason','knownCareer','recommendationReasonInput'];
-    const OBSERVATION_STATUS_IDS = ['performanceCredit','proactiveCompletion','personalHelpAsked','personalGroupRole','improvementPoint'];
-    const CORE_OBSERVATION_IDS = ['performanceCredit', 'proactiveCompletion', 'conflictHandling'];
+    const OBSERVATION_FIELD_IDS = ['performanceCredit','conflictHandling','watchPoint','jobStrength','personalHelpAsked','personalGroupRole','introReason','knownCareer','recommendationReasonInput'];
+    const OBSERVATION_STATUS_IDS = ['watchPoint','personalHelpAsked','personalGroupRole'];
+    const CORE_OBSERVATION_IDS = ['performanceCredit', 'conflictHandling', 'watchPoint'];
     const PERSONAL_OBSERVATION_IDS = ['personalHelpAsked', 'personalGroupRole'];
+    const MIN_OBSERVATION_LENGTH = 15;
     const DIRECT_RELATION_VALUES = [
       '같은 회사·조직에서 함께 근무한 적이 있습니다',
       '프로젝트나 업무를 직접 함께한 적이 있습니다',
@@ -1814,6 +1791,7 @@
       });
       document.getElementById('workTask').required = direct;
       document.getElementById('jobStrength').required = direct;
+      document.getElementById('performanceCredit').required = direct;
       document.getElementById('personalKnownPeriod').required = personal;
       document.getElementById('personalRelationType').required = personal;
       document.getElementById('introReason').required = intro;
@@ -1916,23 +1894,13 @@
     function isObservationNoneChecked(id) {
       return Boolean(getObservationStatus(id));
     }
-    function getConflictHandlingMode() {
-      return document.querySelector('input[data-conflict-escape]:checked')?.dataset.conflictEscape || '';
-    }
-    function isConflictHandlingAnswered() {
-      return Boolean(getConflictHandlingMode()) || Boolean(getValue('conflictHandling'));
-    }
-    function syncConflictHandlingField() {
-      const textarea = document.getElementById('conflictHandling');
-      if (!textarea) return;
-      const escaped = Boolean(getConflictHandlingMode());
-      textarea.disabled = escaped;
-      if (escaped) textarea.value = '';
-      autoGrowTextarea(textarea);
-    }
     function isCoreObservationAnswered(id) {
-      if (id === 'conflictHandling') return isConflictHandlingAnswered();
       return isObservationNoneChecked(id) || Boolean(getValue(id));
+    }
+    function isTooShortObservationAnswer(id) {
+      if (isObservationNoneChecked(id)) return false;
+      const value = clean(getValue(id));
+      return Boolean(value) && value.length < MIN_OBSERVATION_LENGTH;
     }
     function getObservationStatusMap() {
       const map = {};
@@ -1962,28 +1930,31 @@
       updateCharCountFor(id);
     }
     function syncJobStrengthField() {
-      const unknownValue = '특별히 떠오르는 항목이 없습니다';
-      const jobStrengthEl = document.getElementById('jobStrength');
-      const unknownChecked = Boolean(document.querySelector(`input[name="jobStrengthTypes"][value="${unknownValue}"]:checked`));
       document.querySelectorAll('input[name="jobStrengthTypes"]').forEach(input => {
         input.closest('.strength-chip')?.classList.toggle('is-checked', input.checked);
       });
-      if (!jobStrengthEl) return;
-      jobStrengthEl.disabled = unknownChecked;
-      if (unknownChecked) jobStrengthEl.value = '';
       updateCharCountFor('jobStrength');
     }
     function validateObservationFields() {
       if (isDirectMode()) {
         const missingId = CORE_OBSERVATION_IDS.find(id => !isCoreObservationAnswered(id));
         if (missingId) {
-          const targetId = missingId === 'conflictHandling' ? 'conflictHandlingModeGroup' : missingId;
-          showRequiredAlert('함께 일하며 본 모습', document.getElementById(targetId), '각 항목마다 내용을 적거나 해당하는 선택지를 골라 주세요.');
+          showRequiredAlert('함께 일하며 본 모습', document.getElementById(missingId), '각 항목마다 내용을 적어 주세요.');
+          return false;
+        }
+        const tooShortId = CORE_OBSERVATION_IDS.find(isTooShortObservationAnswer);
+        if (tooShortId) {
+          showRequiredAlert('함께 일하며 본 모습', document.getElementById(tooShortId), `조금 더 구체적으로 적어 주세요. (최소 ${MIN_OBSERVATION_LENGTH}자)`);
           return false;
         }
         const jobStrengthEl = document.getElementById('jobStrength');
-        if (!jobStrengthEl.disabled && !getValue('jobStrength')) {
-          showRequiredAlert('함께 일하며 본 모습', jobStrengthEl, '특히 잘한다고 느끼신 부분을 적거나 "특별히 떠오르는 항목이 없습니다"를 선택해 주세요.');
+        const jobStrengthValue = clean(getValue('jobStrength'));
+        if (!jobStrengthValue) {
+          showRequiredAlert('함께 일하며 본 모습', jobStrengthEl, '특히 잘한다고 느끼신 부분을 적어 주세요.');
+          return false;
+        }
+        if (jobStrengthValue.length < MIN_OBSERVATION_LENGTH) {
+          showRequiredAlert('함께 일하며 본 모습', jobStrengthEl, `조금 더 구체적으로 적어 주세요. (최소 ${MIN_OBSERVATION_LENGTH}자)`);
           return false;
         }
       }
@@ -1991,13 +1962,14 @@
         const missingId = PERSONAL_OBSERVATION_IDS.find(id => !isCoreObservationAnswered(id));
         if (missingId) {
           const target = document.getElementById(missingId);
-          showRequiredAlert('함께 일하며 본 모습', target, '각 항목마다 내용을 적거나 해당하는 선택지를 골라 주세요.');
+          showRequiredAlert('알고 지내며 본 모습', target, '각 항목마다 내용을 적어 주세요.');
           return false;
         }
-      }
-      if (!isCoreObservationAnswered('improvementPoint')) {
-        showRequiredAlert('미리 알아두면 좋을 점', document.querySelector('input[name="improvementPointChoice"]'), '해당하는 항목을 선택하고, "있습니다"를 고르셨다면 내용을 적어 주세요.');
-        return false;
+        const tooShortId = PERSONAL_OBSERVATION_IDS.find(isTooShortObservationAnswer);
+        if (tooShortId) {
+          showRequiredAlert('알고 지내며 본 모습', document.getElementById(tooShortId), `조금 더 구체적으로 적어 주세요. (최소 ${MIN_OBSERVATION_LENGTH}자)`);
+          return false;
+        }
       }
       return true;
     }
@@ -2090,7 +2062,6 @@
         if (consentText) return clean(consentText);
       }
       if (el.name === 'conflictTypes') return '가족·친족 여부';
-      if (el.name === 'improvementPointChoice') return '미리 알아두면 좋을 점';
       return el.getAttribute('aria-label') || el.name || '필수 항목';
     }
     function validateVisibleRequiredFields() {
@@ -2179,16 +2150,14 @@
         return [Boolean(value && !isWeakTextAnswer(value))];
       }
       if (title === '함께 일하며 본 모습') {
+        const isAnsweredEnough = id => isCoreObservationAnswered(id) && !isTooShortObservationAnswer(id);
         if (isDirectMode()) {
-          const jobStrengthEl = document.getElementById('jobStrength');
-          const jobStrengthAnswered = Boolean(jobStrengthEl.disabled || getValue('jobStrength'));
-          return [...CORE_OBSERVATION_IDS.map(isCoreObservationAnswered), jobStrengthAnswered];
+          const jobStrengthValue = clean(getValue('jobStrength'));
+          const jobStrengthAnswered = jobStrengthValue.length >= MIN_OBSERVATION_LENGTH;
+          return [jobStrengthAnswered, ...CORE_OBSERVATION_IDS.map(isAnsweredEnough)];
         }
-        if (isPersonalMode()) return PERSONAL_OBSERVATION_IDS.map(isCoreObservationAnswered);
+        if (isPersonalMode()) return PERSONAL_OBSERVATION_IDS.map(isAnsweredEnough);
         return [];
-      }
-      if (title === '미리 알아두면 좋을 점') {
-        return [isCoreObservationAnswered('improvementPoint')];
       }
       if (title === '확인 및 동의') {
         return ['guarantee','directExperienceConfirm','conflictConfirm'].map(id => {
@@ -2360,9 +2329,8 @@
       const recommendationReason = getValue('recommendationReasonInput');
       const candidateConsentAt = intro ? '' : submittedAt;
       const introPolicyAcknowledgedAt = intro ? submittedAt : '';
-      const conflictHandlingMode = direct ? getConflictHandlingMode() : '';
       const directObservationValues = direct
-        ? [getValue('performanceCredit'), getValue('proactiveCompletion'), conflictHandlingMode ? '' : getValue('conflictHandling')]
+        ? [getValue('performanceCredit'), getValue('watchPoint'), getValue('conflictHandling')]
         : [];
       const personalObservationValues = personal
         ? [getValue('personalHelpAsked'), getValue('personalGroupRole')]
@@ -2387,21 +2355,18 @@
         conflictDetail: getValue('conflictDetail'),
         observationStatus: getObservationStatusMap(),
         performanceCredit: direct ? getValue('performanceCredit') : '',
-        conflictHandling: conflictHandlingMode ? '' : getValue('conflictHandling'),
-        conflictHandlingEscapeReason: conflictHandlingMode,
-        proactiveCompletion: direct ? getValue('proactiveCompletion') : '',
+        conflictHandling: direct ? getValue('conflictHandling') : '',
+        watchPoint: direct ? getValue('watchPoint') : '',
         personalHelpAsked: personal ? getValue('personalHelpAsked') : '',
         personalGroupRole: personal ? getValue('personalGroupRole') : '',
         jobStrengthTypes: direct ? getCheckedValues('jobStrengthTypes') : [],
         jobStrength: direct ? getValue('jobStrength') : '',
-        improvementPointChoice: getCheckedValues('improvementPointChoice')[0] || '',
-        improvementPoint: getValue('improvementPoint'),
         introReason: intro ? getValue('introReason') : '',
         knownCareer: intro ? getValue('knownCareer') : '',
         relationshipContext: direct ? getValue('workTask') : '',
         strengths: direct ? getValue('jobStrength') : '',
         collaborationEvidence: [...directObservationValues, ...personalObservationValues].filter(Boolean).join('\n\n'),
-        riskNotes: getValue('improvementPoint'),
+        riskNotes: direct ? getValue('watchPoint') : '',
         recommendationReason,
         candidateConsentConfirmed: !intro && document.getElementById('guarantee').checked ? 'Y' : '',
         introPolicyAcknowledged: intro && document.getElementById('guarantee').checked ? 'Y' : '',
@@ -2475,8 +2440,6 @@
       data.candidateIntentStatus = getCheckedValues('candidateIntentStatus');
       data.observationStatus = getObservationStatusMap();
       data.jobStrengthTypes = getCheckedValues('jobStrengthTypes');
-      data.conflictHandlingMode = getConflictHandlingMode();
-      data.improvementPointChoice = getCheckedValues('improvementPointChoice');
       data.empNo = verifiedEmployee.empNo || getValue('refEmpNo');
       data.savedAt = new Date().toISOString();
       data.expiresAt = new Date(Date.now() + DRAFT_TTL_MS).toISOString();
@@ -2517,13 +2480,6 @@
       OBSERVATION_STATUS_IDS.forEach(syncObservationField);
       setCheckedValues('jobStrengthTypes', data.jobStrengthTypes);
       syncJobStrengthField();
-      if (data.conflictHandlingMode) {
-        const el = document.querySelector(`input[data-conflict-escape="${data.conflictHandlingMode}"]`);
-        if (el) el.checked = true;
-      }
-      syncConflictHandlingField();
-      setCheckedValues('improvementPointChoice', data.improvementPointChoice);
-      syncObservationField('improvementPoint');
       syncRelationField();
       syncEntryMode();
       ['guarantee','directExperienceConfirm','conflictConfirm'].forEach(id => {
@@ -2621,8 +2577,7 @@
         '회사·직무 안내 확인': '3',
         '추천·소개 이유': '4',
         '함께 일하며 본 모습': '5',
-        '미리 알아두면 좋을 점': '6',
-        '확인 및 동의': '7'
+        '확인 및 동의': '6'
       };
       [...form.querySelectorAll(':scope > .section')].forEach(section => {
         const heading = section.querySelector(':scope > h2');
@@ -2772,30 +2727,9 @@
         updateAccordionProgress();
       });
     });
-    document.querySelectorAll('input[data-conflict-escape]').forEach(el => {
-      el.addEventListener('change', () => {
-        if (el.checked) {
-          document.querySelectorAll('input[data-conflict-escape]').forEach(other => {
-            if (other !== el) other.checked = false;
-          });
-        }
-        syncConflictHandlingField();
-        setMessage('', '');
-        updateAccordionProgress();
-      });
-    });
     OBSERVATION_STATUS_IDS.forEach(syncObservationField);
     document.querySelectorAll('input[name="jobStrengthTypes"]').forEach(el => {
-      el.addEventListener('change', event => {
-        const unknownValue = '특별히 떠오르는 항목이 없습니다';
-        if (event.target.value === unknownValue && event.target.checked) {
-          document.querySelectorAll('input[name="jobStrengthTypes"]').forEach(other => {
-            if (other !== event.target) other.checked = false;
-          });
-        } else if (event.target.checked) {
-          const unknown = document.querySelector(`input[name="jobStrengthTypes"][value="${unknownValue}"]`);
-          if (unknown) unknown.checked = false;
-        }
+      el.addEventListener('change', () => {
         syncJobStrengthField();
       });
     });
@@ -2829,7 +2763,6 @@
     syncRelationField();
     syncEntryMode();
     syncJobStrengthField();
-    syncConflictHandlingField();
     syncConflictDetailField();
     updateCandidateText();
     updateSendCodeButtonState();
