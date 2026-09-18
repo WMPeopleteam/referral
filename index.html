@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
   <title>우미 인재추천 센터</title>
   <style>
     :root {
@@ -1498,7 +1499,9 @@
   </div>
 
   <script>
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwIpEnb7CyaPeW3YneFp3XTt5-NOKK5ZL2jrptpW-sOsv0no-WivOtTQLSXOYF3HSfMZQ/exec';
+    // 공개 추천 접수 전용 Apps Script 배포 URL만 사용한다.
+    // 관리자용 DOMAIN 제한 배포 URL을 여기에 넣으면 공개 접수가 막힌다.
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwMa89IxQvjWODNqkYkR8xbDU6llnOUeSPf8GN9LnYSMIhLfDGmMOGvtdVs4t9tImFL/exec';
     const form = document.getElementById('referral-form');
     const message = document.getElementById('message');
     const submitBtn = document.getElementById('submitBtn');
